@@ -2,65 +2,70 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
-import { ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
 
-const ELEMENT_DATA = [
-  {id: "1", username: 'kyloren', email: 'kylo@hm.edu', role: 'admin'},
-  {id: "2", username: 'vader', email: 'vader@hm.edu', role: 'admin'},
-  {id: "3", username: 'solo', email: 'solo@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-  {id: "4", username: 'skywalker', email: 'skywalker@hm.edu', role: 'admin'},
-];
+import { usersQuery, userQuery, updateUserMutation, deleteUserMutation } from './gql'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  users: any;
   constructor(
-    private route: ActivatedRoute,
     private apollo: Apollo
   ) { }
 
   getUsers(): Observable<User[]> {
-    // TODO: send the message _after_ fetching the heroes
-    const allUsers = this.apollo.watchQuery({
-      query: gql`
-        {
-          users {
-            id
-            username
-            email
-            role {
-              name
-            }
-          }
-        }
-      `
+    return this.apollo.watchQuery({ query: usersQuery })
+    .valueChanges
+    .pipe(
+      map((result: any) => {
+        return result.data.users
+      })
+    )
+  }
+
+  updateUser(id: string, username: string, email: string, role: string) {
+    console.log(username, email, role)
+    this.apollo.mutate({
+      mutation: updateUserMutation,
+      variables: {
+        id,
+        username,
+        email,
+        role
+      }
+    }).subscribe(({data}) => {
+      console.log(data)
+    })
+  }
+
+  deleteUser(id: string): Observable<boolean> {
+    return this.apollo.mutate({
+      mutation: deleteUserMutation,
+      variables: {
+        id
+      }
+    })
+    .pipe(
+      map(({data}) => {
+        return data.deleteUser
+      })
+    )
+  }
+
+  getUser(id: string): Observable<User> {
+    return this.apollo.watchQuery({
+      query: userQuery,
+      variables: {
+        id
+      }
     })
     .valueChanges
     .pipe(
       map((result: any) => {
-        this.users = result.data.users
-        return this.users
+        return result.data.user
       })
-    );
-    return allUsers;
-  }
-
-  getUser(id: string): Observable<User> {
-    return of(this.users.find(user => user.id === id));
+    )
   }
 }
