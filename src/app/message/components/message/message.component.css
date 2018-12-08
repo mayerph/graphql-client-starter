@@ -1,0 +1,25 @@
+.message {
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    bottom: 30px;
+}
+
+.error, .warning, .info {
+    width: 300px;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
+.warning {
+    background-color: yellow;
+    color: black;
+}
+
+.info {
+    background-color: green;
+    color: white;
+}

@@ -1,12 +1,19 @@
 .user-administration {
-    padding: 20px;
 }
 
 .table-container {
-    height: 400px;
     overflow: auto;
 }
 
 table {
     width: 100%;
+}
+
+tr.user-list:hover {
+    background: #f5f5f5;
+}
+
+.user-overview {
+    height: 100%;
+    padding-top: 20px;
 }

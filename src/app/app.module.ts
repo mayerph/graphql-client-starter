@@ -18,6 +18,9 @@ import { UserDetailComponent } from './user/components/user-detail/user-detail.c
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageComponent } from './message/components/message/message.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RolesComponent,
     PermissionsComponent,
     UsersComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    MessageComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

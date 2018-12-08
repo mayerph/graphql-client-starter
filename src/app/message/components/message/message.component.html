@@ -1,0 +1,20 @@
+<div *ngIf="messages.length > 0" class="message">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-card *ngFor="let message of messages" [ngClass]="message.level">
+      <mat-card-title>
+        <div fxFlex fxLayoutAlign="start">
+          {{ message.title }}
+        </div>
+        
+        <a (click)="close(message)" fxLayoutAlign="end">
+            <mat-icon>close</mat-icon>
+        </a>
+      
+      </mat-card-title>
+      <mat-card-content>
+        {{ message.message }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

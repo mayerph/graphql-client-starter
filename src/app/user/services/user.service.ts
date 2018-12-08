@@ -3,30 +3,48 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { usersQuery, userQuery, updateUserMutation, deleteUserMutation } from './gql'
+import { MessageService } from 'src/app/message/services/message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
   constructor(
-    private apollo: Apollo
+    private apollo: Apollo,
+    private messageService: MessageService
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.apollo.watchQuery({ query: usersQuery })
+    return this.apollo.watchQuery({ query: usersQuery, errorPolicy: 'all' })
     .valueChanges
     .pipe(
-      map((result: any) => {
-        return result.data.users
+      map(({errors, data}: any) => {
+        if (errors) {
+          throw errors[0]
+        }
+        const users = data.users
+        return users
+      }),
+      catchError((err) => {
+        this.createMessage(err)
+        throw err
       })
     )
   }
 
+  createMessage(err): void {
+    this.messageService.displayMessage({
+      level: 'error',
+      title: 'Error',
+      message: err.message || 'server error. please try again'
+    })
+  }
+
   updateUser(id: string, username: string, email: string, role: string) {
-    console.log(username, email, role)
     this.apollo.mutate({
       mutation: updateUserMutation,
       variables: {
@@ -35,9 +53,14 @@ export class UserService {
         email,
         role
       }
-    }).subscribe(({data}) => {
-      console.log(data)
-    })
+    }).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        this.createMessage(error)
+      }
+    )
   }
 
   deleteUser(id: string): Observable<boolean> {
@@ -48,8 +71,15 @@ export class UserService {
       }
     })
     .pipe(
-      map(({data}) => {
+      map(({errors, data}) => {
+        if (errors) {
+          throw errors[0]
+        }
         return data.deleteUser
+      }),
+      catchError((err) => {
+        this.createMessage(err)
+        throw err
       })
     )
   }
@@ -57,14 +87,23 @@ export class UserService {
   getUser(id: string): Observable<User> {
     return this.apollo.watchQuery({
       query: userQuery,
+      errorPolicy: 'all',
       variables: {
         id
       }
     })
     .valueChanges
     .pipe(
-      map((result: any) => {
-        return result.data.user
+      map(({errors, data}: any) => {
+        if (errors) {
+          throw errors[0]
+        }
+        const user = data.user
+        return user
+      }),
+      catchError((err) => {
+        this.createMessage(err)
+        throw err
       })
     )
   }

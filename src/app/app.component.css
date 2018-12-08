@@ -6,4 +6,8 @@ mat-sidenav {
     width: 250px;
 }
 
+.error-message {
+    width: 100%;
+    height: 100px;
+}
 

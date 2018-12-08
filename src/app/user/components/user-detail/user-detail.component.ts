@@ -77,7 +77,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.location.go('/user-admin')
+    this.location.back()
   }
 
   onSubmit() {
@@ -92,7 +93,6 @@ export class UserDetailComponent implements OnInit {
         this.userForm.controls.role.touched ?  this.userForm.controls.role.value : null;
       this.userService.updateUser(id, username, email, role)
     }
-    this.goBack()
   }
 
 }
