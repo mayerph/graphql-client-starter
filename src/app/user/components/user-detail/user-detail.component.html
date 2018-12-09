@@ -1,9 +1,16 @@
 <section class="edit-user" fxLayout fxLayoutAlign="center center">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
       <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="user">
         <mat-card-title fxLayoutAlign="center">{{ user.username }}</mat-card-title>
+        <img mat-card-image [src]="url" alt="Photo of a Shiba Inu" (click)="fileInput.click()">
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-            <mat-form-field class="user-input">
+          <input 
+            type='file' 
+            (change)="onSelectFile($event)" 
+            #fileInput 
+            formControlName="image"
+            hidden>  
+          <mat-form-field class="user-input">
                 <input 
                 type="text"
                 matInput 

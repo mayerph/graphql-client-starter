@@ -44,14 +44,16 @@ export class UserService {
     })
   }
 
-  updateUser(id: string, username: string, email: string, role: string) {
+  updateUser(id: string, username: string, email: string, role: string, image: Blob) {
+    //const file = new Blob(['Foo.'], { type: 'text/plain' })
     this.apollo.mutate({
       mutation: UPDATE_USER_MUTATION,
       variables: {
         id,
         username,
         email,
-        role
+        role,
+        image
       }
     }).subscribe(
       data => {

@@ -4,12 +4,16 @@ import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import { Message } from './message/models/message.mode';
+import { createUploadLink } from 'apollo-upload-client'
+
 
 const uri = 'http://localhost:8000/graphql'; // <-- add the URL of the GraphQL server here
 
+const link = createUploadLink({uri})
+
 export function createApollo(httpLink: HttpLink) {
   const apollo = {
-    link: httpLink.create({uri}),
+    link,
     cache: new InMemoryCache(),
     errorPolicy: 'all'
   };

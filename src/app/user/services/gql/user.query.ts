@@ -14,6 +14,11 @@ const USER_QUERY = gql`
            query getUser($id: ID!) {
                 user(id: $id) {
                     ...defaultFields
+                    img {
+                        name
+                        mimeType
+                        source
+                    }
                 }
             }
             ${ USER_FRAGMENTS.defaultFields }`

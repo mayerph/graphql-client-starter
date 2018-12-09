@@ -1,4 +1,5 @@
 import { Role } from './role.model';
+import { Image } from './image.model'
 
 export class User {
     id?: any
@@ -6,5 +7,5 @@ export class User {
     password: string
     email: string
     role: Role
-    img?: any
+    img?: Image
 }
