@@ -5,7 +5,7 @@ import { User } from '../models/user.model';
 import { Apollo } from 'apollo-angular';
 import { map, catchError } from 'rxjs/operators';
 
-import { usersQuery, userQuery, updateUserMutation, deleteUserMutation } from './gql'
+import { USERS_QUERY, USER_QUERY, UPDATE_USER_MUTATION, DELETE_USER_MUTATION } from './gql'
 import { MessageService } from 'src/app/message/services/message.service';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class UserService {
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.apollo.watchQuery({ query: usersQuery, errorPolicy: 'all' })
+    return this.apollo.watchQuery({ query: USERS_QUERY, errorPolicy: 'all' })
     .valueChanges
     .pipe(
       map(({errors, data}: any) => {
@@ -46,7 +46,7 @@ export class UserService {
 
   updateUser(id: string, username: string, email: string, role: string) {
     this.apollo.mutate({
-      mutation: updateUserMutation,
+      mutation: UPDATE_USER_MUTATION,
       variables: {
         id,
         username,
@@ -65,7 +65,7 @@ export class UserService {
 
   deleteUser(id: string): Observable<boolean> {
     return this.apollo.mutate({
-      mutation: deleteUserMutation,
+      mutation: DELETE_USER_MUTATION,
       variables: {
         id
       }
@@ -86,7 +86,7 @@ export class UserService {
 
   getUser(id: string): Observable<User> {
     return this.apollo.watchQuery({
-      query: userQuery,
+      query: USER_QUERY,
       errorPolicy: 'all',
       variables: {
         id

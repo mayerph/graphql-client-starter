@@ -1,29 +1,21 @@
 import gql from 'graphql-tag';
+import { USER_FRAGMENTS } from './user.fragment'
 
 
-const usersQuery = gql`
+const USERS_QUERY = gql`
            query getUsers {
                 users {
-                    id
-                    username
-                    email
-                    role {
-                    name
-                    }
+                    ...defaultFields
                 }
-            }`
+            }
+            ${ USER_FRAGMENTS.defaultFields }`
 
-const userQuery = gql`
+const USER_QUERY = gql`
            query getUser($id: ID!) {
                 user(id: $id) {
-                    id
-                    username
-                    email
-                    role {
-                        id
-                        name
-                    }
+                    ...defaultFields
                 }
-            }`
+            }
+            ${ USER_FRAGMENTS.defaultFields }`
 
-export { usersQuery, userQuery }
+export { USERS_QUERY, USER_QUERY }
