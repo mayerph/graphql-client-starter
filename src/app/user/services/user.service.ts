@@ -5,7 +5,12 @@ import { User } from '../models/user.model';
 import { Apollo } from 'apollo-angular';
 import { map, catchError } from 'rxjs/operators';
 
-import { USERS_QUERY, USER_QUERY, UPDATE_USER_MUTATION, DELETE_USER_MUTATION } from './gql'
+import {
+  USERS_QUERY,
+  USER_QUERY,
+  UPDATE_USER_MUTATION,
+  DELETE_USER_MUTATION,
+  CREATE_USER_MUTATION } from './gql'
 import { MessageService } from 'src/app/message/services/message.service';
 
 @Injectable({
@@ -53,6 +58,29 @@ export class UserService {
         username,
         email,
         role,
+        image
+      }
+    }).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        this.createMessage(error)
+      }
+    )
+  }
+
+  addUser(username: string, email: string, role: string, image: Blob) {
+    //const file = new Blob(['Foo.'], { type: 'text/plain' })
+    console.log(username, email, role, image)
+    const password = 'sterne123'
+    this.apollo.mutate({
+      mutation: CREATE_USER_MUTATION,
+      variables: {
+        username,
+        email,
+        role,
+        password,
         image
       }
     }).subscribe(

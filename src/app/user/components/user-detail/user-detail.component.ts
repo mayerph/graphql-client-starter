@@ -20,15 +20,15 @@ export class UserDetailComponent implements OnInit {
   @Input() roles: Role[];
   @Input() selectedRole: string;
   userForm: FormGroup;
-  url: any
+  url: any = 'http://127.0.0.1:8000/static/images/user/userImage_default.png'
   image: any
+  editUser: boolean
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
-    private roleService: RoleService,
-    private sanitizer: DomSanitizer
+    private roleService: RoleService
   ) { }
 
   ngOnInit() {
@@ -71,12 +71,13 @@ export class UserDetailComponent implements OnInit {
   getUser(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
+      this.editUser = true
       this.userService.getUser(id)
       .subscribe((user) => {
         this.user = user
         this.selectedRole = this.user.role.id
         this.setUserValues(this.user)
-        this.url = user.img.source || ''
+        this.url = this.user.img.source || ''
       })
     }
   }
@@ -98,7 +99,7 @@ export class UserDetailComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userForm.touched) {
-      const id = this.userForm.controls.id.value
+      const id = this.editUser ? this.userForm.controls.id.value : null
       const username =
         this.userForm.controls.username.touched ?  this.userForm.controls.username.value : null;
       const email =
@@ -107,7 +108,10 @@ export class UserDetailComponent implements OnInit {
         this.userForm.controls.role.touched ?  this.userForm.controls.role.value : null;
       const img =
         this.userForm.controls.image.touched ?  this.image : null;
-      this.userService.updateUser(id, username, email, role, img)
+      
+      this.editUser
+        ? this.userService.updateUser(id, username, email, role, img)
+        : this.userService.addUser(username, email, role, img)
     }
   }
 }
