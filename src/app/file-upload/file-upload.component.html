@@ -1,0 +1,8 @@
+<img [src]="url" alt="Photo of a Shiba Inu" (click)="fileInput.click()" [ngStyle]="width">
+<input 
+  type='file' 
+  (change)="onSelectFile($event)" 
+  #fileInput 
+  hidden> 
+
+ 

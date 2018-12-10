@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageComponent } from './message/components/message/message.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SignupComponent } from './auth/signup/signup.component';
     MessageComponent,
     LoginComponent,
     SignupComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,
