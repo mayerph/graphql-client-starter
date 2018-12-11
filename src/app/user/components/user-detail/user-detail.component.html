@@ -31,13 +31,13 @@
             </mat-form-field>
             <mat-form-field class="user-input">
               <!--<input matInput placeholder="role" [(ngModel)]="user.role.name">-->
-              <mat-select formControlName="role">
+              <mat-select formControlName="role" placeholder="Role" required>
                   <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name  }}</mat-option>
               </mat-select>
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="center">
-          <button (click)="goBack()" mat-button>Cancel</button>
+          <button (click)="location.back()" mat-button>Cancel</button>
           <button type="submit" mat-button [disabled]="userForm.invalid">Save</button>
         </mat-card-actions>
       </mat-card>

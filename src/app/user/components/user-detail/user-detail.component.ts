@@ -77,7 +77,7 @@ export class UserDetailComponent implements OnInit {
         this.user = user
         this.selectedRole = this.user.role.id
         this.setUserValues(this.user)
-        this.url = this.user.img.source || ''
+        this.url = this.user.img !== null ? this.user.img.source : ''
       })
     }
   }
