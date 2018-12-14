@@ -12,4 +12,12 @@ export class MessageService {
   displayMessage(message: Message) {
     this.errorOccurred.next(message)
   }
+
+  createMessage(err): void {
+    this.displayMessage({
+      level: 'error',
+      title: 'Error',
+      message: err.message || 'server error. please try again'
+    })
+  }
 }

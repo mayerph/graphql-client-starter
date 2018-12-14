@@ -38,7 +38,7 @@ export class UserService {
         return users
       }),
       catchError((err) => {
-        this.createMessage(err)
+        this.messageService.createMessage(err)
         throw err
       })
     )
@@ -54,14 +54,6 @@ export class UserService {
 
   subscribeUserUpdated(): Observable<any> {
     return this.apollo.subscribe({ query: USER_UPDATED_SUBSCRIPTION })
-  }
-
-  createMessage(err): void {
-    this.messageService.displayMessage({
-      level: 'error',
-      title: 'Error',
-      message: err.message || 'server error. please try again'
-    })
   }
 
   updateUser(id: string, username: string, email: string, role: string, image: Blob) {
@@ -80,7 +72,7 @@ export class UserService {
         console.log(data)
       },
       error => {
-        this.createMessage(error)
+        this.messageService.createMessage(error)
       }
     )
   }
@@ -103,7 +95,7 @@ export class UserService {
         console.log(data)
       },
       error => {
-        this.createMessage(error)
+        this.messageService.createMessage(error)
       }
     )
   }
@@ -123,7 +115,7 @@ export class UserService {
         return data.deleteUser
       }),
       catchError((err) => {
-        this.createMessage(err)
+        this.messageService.createMessage(err)
         throw err
       })
     )
@@ -147,7 +139,7 @@ export class UserService {
         return user
       }),
       catchError((err) => {
-        this.createMessage(err)
+        this.messageService.createMessage(err)
         throw err
       })
     )

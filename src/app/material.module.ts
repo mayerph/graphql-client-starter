@@ -18,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatSortModule, MatPaginatorModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
       MatSortModule,
       MatPaginatorModule,
       MatMenuModule,
-      MatTooltipModule
+      MatTooltipModule,
+      MatProgressBarModule
     ],
   exports: [
         MatButtonModule,
@@ -61,7 +63,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatMenuModule
+        MatMenuModule,
+        MatProgressBarModule
   ],
 })
 export class MaterialModule { }

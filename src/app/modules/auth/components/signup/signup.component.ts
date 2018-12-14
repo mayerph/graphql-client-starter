@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { AuthService } from '../../services/auth/auth.service';
+import { LoaderService } from 'src/app/modules/loader/services/loader.service';
 
 const moment = _moment;
 
@@ -34,7 +36,10 @@ export class SignupComponent implements OnInit {
   //date = new FormControl(moment());
   maxDate = moment().subtract(18, 'days').calendar();
   signupForm: FormGroup;
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private loaderService: LoaderService
+  ) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -46,9 +51,16 @@ export class SignupComponent implements OnInit {
       birthday: new FormControl(moment(), { validators: [Validators.required] }),
     });
   }
- 
+
   onSubmit() {
-    console.log("test")
+    this.loaderService.toggleLoader()
+    this.authService.signup(
+      this.signupForm.controls.username.value,
+      this.signupForm.controls.email.value,
+      this.signupForm.controls.password.value
+    ).subscribe((token) => {
+      this.loaderService.toggleLoader()
+    })
   }
 
 }

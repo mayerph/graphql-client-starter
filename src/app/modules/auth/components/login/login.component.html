@@ -3,12 +3,12 @@
       <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginForm" (ngSubmit)="onSubmit()" fxLayoutGap="10px">
         <mat-form-field>
             <input 
-            type="email" 
+            type="text" 
             matInput 
-            placeholder="Your email"  
-            formControlName="email">
-            <mat-hint>Please enter a valid email.</mat-hint>
-            <mat-error>E-Mail is invalid.</mat-error>
+            placeholder="Username"
+            formControlName="username">
+            <mat-hint>Please enter your username</mat-hint>
+            <mat-error>username is invalid.</mat-error>
         </mat-form-field>
         <mat-form-field>
             <input 

@@ -22,6 +22,7 @@ import { MessageComponent } from './modules/message/components/message/message.c
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { ImageUploadComponent } from './modules/image/components/image-upload/image-upload.component';
+import { LoaderComponent } from './modules/loader/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ImageUploadComponent } from './modules/image/components/image-upload/im
     LoginComponent,
     SignupComponent,
     ImageUploadComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
