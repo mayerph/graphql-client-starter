@@ -1,0 +1,46 @@
+<section class="edit-user" fxLayout fxLayoutAlign="center center">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+      <mat-card fxFlex.xs="100%" fxFlex="400px"> <!--*ngIf="user"-->
+        <mat-card-title fxLayoutAlign="center">{{ user?.username }}</mat-card-title>
+        <app-image-upload [url]="url" [width]="{ 'width': 'calc(100% + 32px)'}" mat-card-image (fileToUpload)="changeState($event)"></app-image-upload>
+        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field class="user-input" *ngIf="editUser">
+                <input 
+                type="text"
+                matInput 
+                placeholder="Id"
+                formControlName="id"
+                required>
+            </mat-form-field>
+            <mat-form-field class="user-input">
+              <input 
+              type="text"
+              matInput 
+              placeholder="Username"
+              formControlName="username"
+              required
+              >
+            </mat-form-field>
+            <mat-form-field class="user-input">
+              <input 
+              type="email"
+              matInput 
+              placeholder="E-Mail"
+              formControlName="email"
+              required>
+            </mat-form-field>
+            <mat-form-field class="user-input">
+              <!--<input matInput placeholder="role" [(ngModel)]="user.role.name">-->
+              <mat-select formControlName="role" placeholder="Role" required>
+                  <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions fxLayoutAlign="center">
+          <button (click)="location.back()" mat-button>Cancel</button>
+          <button type="submit" mat-button [disabled]="userForm.invalid">Save</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+</section>
+  
