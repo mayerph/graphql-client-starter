@@ -1,0 +1,16 @@
+<section fxLayout="row" fxLayoutAlign="center center" class="product-list"> 
+  <mat-card mat-card fxFlex="100%" fxFlex="400px">
+    <mat-list>
+        <mat-list-item *ngFor="let product of products">
+          <img matListAvatar [src]="product.img?.source || defaultImage" [alt]="product.name">
+          <h3 matLine> {{ product.name }} </h3>
+          <p matLine>
+            <span *ngFor="let category of product.categories; let first = first;"> 
+              <span *ngIf="!first">-</span>
+              {{ category.name }} 
+            </span>
+          </p>
+        </mat-list-item>
+    </mat-list>
+  </mat-card>
+</section>

@@ -22,7 +22,7 @@ export class UserDetailComponent implements OnInit {
   @Input() roles: Role[];
   @Input() selectedRole: string;
   userForm: FormGroup;
-  url: any = 'http://127.0.0.1:8000/static/images/user/userImage_default.png'
+  url: any = 'http://127.0.0.1:8000/static/images/user/default/userImage_default.png'
   image: any
   editUser: boolean
   passwordPlacholder = '1234'

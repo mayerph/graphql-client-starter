@@ -7,6 +7,7 @@ import { UserDetailComponent } from './modules/user/components/user-detail/user-
 import { LoginComponent } from './modules/auth/components/login/login.component'
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { AuthGuard } from './modules/auth/guard/auth.guard'
+import { ProductListComponent } from './modules/product/components/product-list/product-list.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
@@ -20,10 +21,11 @@ const routes: Routes = [
     }
   },
   { path: 'user-admin/user/:id', component: UserDetailComponent },
-  { path: 'products', component: ProductAdminComponent},
+  { path: 'product-admin', component: ProductAdminComponent},
   { path: 'signin', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'adduser', component: UserDetailComponent},
+  { path: 'products', component: ProductListComponent},
   { path: '**', redirectTo: '' }
 ];
 

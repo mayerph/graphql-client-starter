@@ -18,13 +18,13 @@
               <mat-icon>people</mat-icon>
               <span>Users</span>
             </button>
-            <button routerLink="/products" mat-menu-item>
+            <button routerLink="/product-admin" mat-menu-item>
               <mat-icon>edit</mat-icon>
               <span>Products</span>
             </button>
           </mat-menu>
         </div>
-        <a *ngIf="isAuth" routerLink="/signin" mat-button>Products</a>
+        <a *ngIf="isAuth" routerLink="/products" mat-button>Products</a>
         <a *ngIf="!isAuth" routerLink="/signin" mat-button>Sign in</a>
         <a *ngIf="!isAuth" routerLink="/signup" mat-button>Sign up</a>
         <div *ngIf="isAuth">

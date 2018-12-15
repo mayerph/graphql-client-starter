@@ -23,6 +23,7 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { ImageUploadComponent } from './modules/image/components/image-upload/image-upload.component';
 import { LoaderComponent } from './modules/loader/components/loader/loader.component';
+import { ProductListComponent } from './modules/product/components/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { LoaderComponent } from './modules/loader/components/loader/loader.compo
     SignupComponent,
     ImageUploadComponent,
     LoaderComponent,
+    ProductListComponent,
   ],
   imports: [
     BrowserModule,
