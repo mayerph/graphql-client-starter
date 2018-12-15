@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, Subscription, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { map, catchError } from 'rxjs/operators';
@@ -14,7 +14,6 @@ import {
   USER_CREATED_SUBSCRIPTION,
   USER_DELETED_SUBSCRIPTION,
   USER_UPDATED_SUBSCRIPTION } from '../gql'
-import { MessageService } from 'src/app/modules/message/services/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +21,7 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 export class UserService {
   userCreatedSubscription: Subscription;
   constructor(
-    private apollo: Apollo,
-    private messageService: MessageService
+    private apollo: Apollo
   ) { }
 
   getUsers(): Observable<User[]> {
@@ -37,9 +35,8 @@ export class UserService {
         const users = data.users
         return users
       }),
-      catchError((err) => {
-        this.messageService.createMessage(err)
-        throw err
+      catchError((error) => {
+        return throwError(error)
       })
     )
   }
@@ -56,32 +53,33 @@ export class UserService {
     return this.apollo.subscribe({ query: USER_UPDATED_SUBSCRIPTION })
   }
 
-  updateUser(id: string, username: string, email: string, role: string, image: Blob) {
+  updateUser(id: string, username: string, email: string, role: string, image: Blob, password: string): Observable<any> {
     //const file = new Blob(['Foo.'], { type: 'text/plain' })
-    this.apollo.mutate({
+    return this.apollo.mutate({
       mutation: UPDATE_USER_MUTATION,
       variables: {
         id,
         username,
         email,
         role,
-        image
+        image,
+        password
       }
-    }).subscribe(
-      data => {
-        console.log(data)
-      },
-      error => {
-        this.messageService.createMessage(error)
-      }
+    }).pipe(
+      map(({errors, data}) => {
+        if (errors) {
+          throw errors[0]
+        }
+        return data
+      }),
+      catchError((error) => {
+        return throwError(error)
+      })
     )
   }
 
-  addUser(username: string, email: string, role: string, image: Blob) {
-    //const file = new Blob(['Foo.'], { type: 'text/plain' })
-    console.log(username, email, role, image)
-    const password = 'sterne123'
-    this.apollo.mutate({
+  addUser(username: string, email: string, role: string, image: Blob, password: string): Observable<any> {
+    return this.apollo.mutate({
       mutation: CREATE_USER_MUTATION,
       variables: {
         username,
@@ -90,13 +88,17 @@ export class UserService {
         password,
         image
       }
-    }).subscribe(
-      data => {
+    }).pipe(
+      map(({errors, data}) => {
+        if (errors) {
+          throw errors[0]
+        }
         console.log(data)
-      },
-      error => {
-        this.messageService.createMessage(error)
-      }
+        return data
+      }),
+      catchError((error) => {
+        return throwError(error)
+      })
     )
   }
 
@@ -114,9 +116,8 @@ export class UserService {
         }
         return data.deleteUser
       }),
-      catchError((err) => {
-        this.messageService.createMessage(err)
-        throw err
+      catchError((error) => {
+        return throwError(error)
       })
     )
   }
@@ -138,9 +139,8 @@ export class UserService {
         const user = data.user
         return user
       }),
-      catchError((err) => {
-        this.messageService.createMessage(err)
-        throw err
+      catchError((error) => {
+        return throwError(error)
       })
     )
   }

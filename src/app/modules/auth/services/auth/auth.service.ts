@@ -3,7 +3,7 @@ import { SIGNUP_MUTATION, SIGNIN_MUTATION } from '../../gql'
 import { Apollo } from 'apollo-angular';
 import { MessageService } from '../../../message/services/message.service';
 import { map, catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +29,10 @@ export class AuthService {
           throw errors[0]
         }
         const token = data.signUp.token
-        localStorage.setItem('token', token)
         return token
       }),
-      catchError((err) => {
-        this.messageService.createMessage(err)
-        throw err
+      catchError((error) => {
+        return throwError(error)
       })
     )
   }
@@ -52,12 +50,10 @@ export class AuthService {
           throw errors[0]
         }
         const token = data.signIn.token
-        localStorage.setItem('token', token)
         return token
       }),
-      catchError((err) => {
-        this.messageService.createMessage(err)
-        throw err
+      catchError((error) => {
+        return throwError(error)
       })
     )
   }

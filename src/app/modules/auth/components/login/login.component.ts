@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { LoaderService } from 'src/app/modules/loader/services/loader.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { MessageService } from 'src/app/modules/message/services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +17,13 @@ export class LoginComponent implements OnInit {
  
   constructor(
     private authService: AuthService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router: Router,
+    private messageService: MessageService
   ) {}
  
   ngOnInit() {
     this.createForm()
-    
   }
 
   createForm(): void {
@@ -37,9 +41,17 @@ export class LoginComponent implements OnInit {
     this.authService.signin(
       this.loginForm.controls.username.value,
       this.loginForm.controls.password.value,
-    ).subscribe((token) => {
-      this.loaderService.toggleLoader()
-    })
+    ).subscribe(
+      token => {
+        localStorage.setItem('token', token)
+        this.loaderService.toggleLoader()
+        window.location.replace('/');
+      },
+      error => {
+        this.loaderService.toggleLoader()
+        this.messageService.createMessage(error)
+        throw error
+      })
   }
 
 }

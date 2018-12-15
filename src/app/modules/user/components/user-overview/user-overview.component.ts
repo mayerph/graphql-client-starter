@@ -3,6 +3,9 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/modules/loader/services/loader.service';
+import { Router } from '@angular/router';
+import { MessageService } from 'src/app/modules/message/services/message.service';
 
 
 @Component({
@@ -23,13 +26,13 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private loaderService: LoaderService,
+    private messageService: MessageService
     ) { }
 
-  ngOnInit() { 
-    this.userService.getUsers().subscribe(users => {
-      this.dataSource.data = users
-    });
+  ngOnInit() {
+    this.getUsers()
 
     this.userCreatedSubscription = this.userService.subscribeUserCreated().subscribe(({data}) => {
       this.addUserToDataSource(data.userCreated)
@@ -42,6 +45,21 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userUpdatedSubscription = this.userService.subscribeUserUpdated().subscribe(({data}) => {
       this.updateUserInDataSource(data.userUpdated)
     })
+  }
+
+  getUsers(): void {
+    this.loaderService.toggleLoader()
+    this.userService.getUsers().subscribe(
+      users => {
+        this.loaderService.toggleLoader()
+        this.dataSource.data = users
+      },
+      error => {
+        this.loaderService.toggleLoader()
+        this.messageService.createMessage(error)
+        throw error
+      }
+    );
   }
 
   updateUserInDataSource(user: User) {
@@ -69,13 +87,19 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteUser(user: User) {
-    this.userService.deleteUser(user.id).subscribe((success) => {
-      if (success) {
-        this.removeUserFromDataSource(user.id)
-      } else {
-        console.log('nicht erfolgreich')
-      }
-    })
+    this.loaderService.toggleLoader()
+    this.userService.deleteUser(user.id).subscribe(
+      success => {
+        if (success) {
+          this.loaderService.toggleLoader()
+          this.removeUserFromDataSource(user.id)
+        }
+      },
+      error => {
+        this.loaderService.toggleLoader()
+        this.messageService.createMessage(error)
+        throw error
+      })
   }
 
   removeUserFromDataSource(id: string) {
@@ -84,6 +108,8 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userCreatedSubscription.unsubscribe()
+    //this.userDeletedSubscription.unsubscribe()
+    //this.userCreatedSubscription.unsubscribe()
+    //this.userUpdatedSubscription.unsubscribe()
   }
 }

@@ -9,7 +9,7 @@ import { SignupComponent } from './modules/auth/components/signup/signup.compone
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
-  { path: 'user-admin', component: UserAdminComponent},
+  { path: 'user-admin', component: UserAdminComponent, runGuardsAndResolvers: 'always'},
   { path: 'user-admin/user/:id', component: UserDetailComponent },
   { path: 'products', component: ProductAdminComponent},
   { path: 'signin', component: LoginComponent},
@@ -18,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
