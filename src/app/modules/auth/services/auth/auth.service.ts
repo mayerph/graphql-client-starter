@@ -3,16 +3,21 @@ import { SIGNUP_MUTATION, SIGNIN_MUTATION } from '../../gql'
 import { Apollo } from 'apollo-angular';
 import { MessageService } from '../../../message/services/message.service';
 import { map, catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from 'src/app/modules/user/models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  helper = new JwtHelperService();
+  authChange = new Subject<boolean>();
 
   constructor(
     private apollo: Apollo,
-    private messageService: MessageService
+    private router: Router
   ) { }
 
   signup(username: string, email: string, password: string): Observable<any> {
@@ -49,6 +54,7 @@ export class AuthService {
         if (errors) {
           throw errors[0]
         }
+        this.authChange.next(true);
         const token = data.signIn.token
         return token
       }),
@@ -57,4 +63,30 @@ export class AuthService {
       })
     )
   }
+
+  logout(): void {
+    localStorage.removeItem('token')
+    this.authChange.next(false);
+    this.router.navigate(['/signin']);
+  }
+
+  setToken(token): void {
+    localStorage.setItem('token', token)
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token')
+    return !this.helper.isTokenExpired(token)
+  }
+
+  decodeToken(): User {
+    const token = localStorage.getItem('token')
+    const decodedToken = this.helper.decodeToken(token)
+    return decodedToken
+  }
+
+  authState(): void {
+    this.authChange.next(this.isAuthenticated())
+  }
+
 }

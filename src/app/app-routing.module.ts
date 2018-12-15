@@ -6,19 +6,30 @@ import { ProductAdminComponent } from './modules/product/components/product-admi
 import { UserDetailComponent } from './modules/user/components/user-detail/user-detail.component';
 import { LoginComponent } from './modules/auth/components/login/login.component'
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
+import { AuthGuard } from './modules/auth/guard/auth.guard'
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
-  { path: 'user-admin', component: UserAdminComponent, runGuardsAndResolvers: 'always'},
+  {
+    path: 'user-admin',
+    component: UserAdminComponent,
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: 'ADMIN'
+    }
+  },
   { path: 'user-admin/user/:id', component: UserDetailComponent },
   { path: 'products', component: ProductAdminComponent},
   { path: 'signin', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'adduser', component: UserDetailComponent},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

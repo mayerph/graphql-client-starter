@@ -9,28 +9,33 @@
       <a routerLink="/" mat-button>HOME</a>
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
-        <a mat-button [matMenuTriggerFor]="admin">
-          Admin
-        </a>
-        <mat-menu #admin="matMenu">
-          <button routerLink="/user-admin" mat-menu-item>
-            <mat-icon>people</mat-icon>
-            <span>Users</span>
-          </button>
-          <button routerLink="/products" mat-menu-item>
-            <mat-icon>edit</mat-icon>
-            <span>Products</span>
-          </button>
-        </mat-menu>
-        <a routerLink="/signin" mat-button>Sign in</a>
-        <a routerLink="/signup" mat-button>Sign up</a>
-        <a mat-button [matMenuTriggerFor]="menu">
-          <mat-icon>person</mat-icon>
-        </a>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>Your profile</button>
-          <button mat-menu-item (click)="onLogout()">Sign out</button>
-        </mat-menu>
+        <div *ngIf="isAuth">
+          <a mat-button [matMenuTriggerFor]="admin">
+            Admin
+          </a>
+          <mat-menu #admin="matMenu">
+            <button routerLink="/user-admin" mat-menu-item>
+              <mat-icon>people</mat-icon>
+              <span>Users</span>
+            </button>
+            <button routerLink="/products" mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              <span>Products</span>
+            </button>
+          </mat-menu>
+        </div>
+        <a *ngIf="isAuth" routerLink="/signin" mat-button>Products</a>
+        <a *ngIf="!isAuth" routerLink="/signin" mat-button>Sign in</a>
+        <a *ngIf="!isAuth" routerLink="/signup" mat-button>Sign up</a>
+        <div *ngIf="isAuth">
+          <a mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>person</mat-icon>
+          </a>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Your profile</button>
+            <button mat-menu-item (click)="onLogout()">Sign out</button>
+          </mat-menu>
+        </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -1,34 +1,40 @@
 <mat-nav-list>
-  <a mat-list-item (click)="onClose()">
-    <mat-icon>person</mat-icon>
-    <span class="nav-caption">Profile</span>
-  </a>
-  <mat-divider></mat-divider>
-  <h3 matSubheader>Admin</h3>
-  <a mat-list-item routerLink="/user-admin" (click)="onClose()">
-    <mat-icon>people</mat-icon>
-    <span class="nav-caption">User</span>
-  </a>
-  <a mat-list-item routerLink="/products" (click)="onClose()">
-    <mat-icon>edit</mat-icon>
-    <span class="nav-caption">Products</span>
-  </a>
-  <mat-divider></mat-divider>
-  <h3 matSubheader>Auth</h3>
-  <a mat-list-item routerLink="/signup" (click)="onClose()">
-    <mat-icon>face</mat-icon>
-    <span class="nav-caption">Sign Up</span>
-  </a>
-  <a mat-list-item routerLink="/signin" (click)="onClose()">
-    <mat-icon>input</mat-icon>
-    <span class="nav-caption">Login</span>
-  </a>
-  <mat-divider></mat-divider>
-  <mat-list-item>
-      <button mat-icon-button (click)="onLogout()">
-          <mat-icon>eject</mat-icon>
-          <span class="nav-caption">Logout</span>
-      </button>
-  </mat-list-item>
+  <div *ngIf="isAuth">
+    <a mat-list-item (click)="onClose()">
+      <mat-icon>person</mat-icon>
+      <span class="nav-caption">Profile</span>
+    </a>
+    <mat-divider></mat-divider>
+    <h3 matSubheader>Admin</h3>
+    <a mat-list-item routerLink="/user-admin" (click)="onClose()">
+      <mat-icon>people</mat-icon>
+      <span class="nav-caption">User</span>
+    </a>
+    <a mat-list-item routerLink="/products" (click)="onClose()">
+      <mat-icon>edit</mat-icon>
+      <span class="nav-caption">Products</span>
+    </a>
+  </div>
+  <div *ngIf="!isAuth">
+    <mat-divider></mat-divider>
+    <h3 matSubheader>Auth</h3>
+    <a mat-list-item routerLink="/signup" (click)="onClose()">
+      <mat-icon>face</mat-icon>
+      <span class="nav-caption">Sign Up</span>
+    </a>
+    <a mat-list-item routerLink="/signin" (click)="onClose()">
+      <mat-icon>input</mat-icon>
+      <span class="nav-caption">Login</span>
+    </a>
+  </div>
+  <div *ngIf="isAuth">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+        <button mat-icon-button (click)="onLogout()">
+            <mat-icon>eject</mat-icon>
+            <span class="nav-caption">Logout</span>
+        </button>
+    </mat-list-item>
+  </div>
   
 </mat-nav-list>

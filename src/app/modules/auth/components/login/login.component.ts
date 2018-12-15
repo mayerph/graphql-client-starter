@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
       this.loginForm.controls.password.value,
     ).subscribe(
       token => {
-        localStorage.setItem('token', token)
+        this.authService.setToken(token)
         this.loaderService.toggleLoader()
-        window.location.replace('/');
+        this.router.navigateByUrl('/')
       },
       error => {
         this.loaderService.toggleLoader()
