@@ -8,7 +8,7 @@ export class LoaderService {
 
   loaderChange = new Subject<boolean>();
 
-  toggleLoader() {
-    this.loaderChange.next()
+  changeLoader(state: boolean) {
+    this.loaderChange.next(state)
   }
 }

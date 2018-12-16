@@ -53,13 +53,13 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loaderService.toggleLoader()
+    this.loaderService.changeLoader(true)
     this.authService.signup(
       this.signupForm.controls.username.value,
       this.signupForm.controls.email.value,
       this.signupForm.controls.password.value
     ).subscribe((token) => {
-      this.loaderService.toggleLoader()
+      this.loaderService.changeLoader(false)
     })
   }
 

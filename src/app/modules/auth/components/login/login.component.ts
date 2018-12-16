@@ -37,18 +37,18 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loaderService.toggleLoader()
+    this.loaderService.changeLoader(true)
     this.authService.signin(
       this.loginForm.controls.username.value,
       this.loginForm.controls.password.value,
     ).subscribe(
       token => {
+        this.loaderService.changeLoader(false)
         this.authService.setToken(token)
-        this.loaderService.toggleLoader()
         this.router.navigateByUrl('/')
       },
       error => {
-        this.loaderService.toggleLoader()
+        this.loaderService.changeLoader(false)
         this.messageService.createMessage(error)
         throw error
       })

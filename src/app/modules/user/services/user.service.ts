@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of, Subscription, throwError } from 'rxjs';
+import { Observable, of, Subscription, throwError, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { map, catchError } from 'rxjs/operators';
@@ -19,20 +19,20 @@ import {
   providedIn: 'root'
 })
 export class UserService {
-  userCreatedSubscription: Subscription;
+
   constructor(
     private apollo: Apollo
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.apollo.watchQuery({ query: USERS_QUERY, errorPolicy: 'all' })
+    return this.apollo.watchQuery({ query: USERS_QUERY, errorPolicy: 'all', fetchPolicy: 'network-only' })
     .valueChanges
     .pipe(
-      map(({errors, data}: any) => {
-        if (errors) {
-          throw errors[0]
+      map((result: any) => {
+        if (result.errors) {
+          throw result.errors[0]
         }
-        const users = data.users
+        const users = result.data.users
         return users
       }),
       catchError((error) => {
@@ -93,7 +93,6 @@ export class UserService {
         if (errors) {
           throw errors[0]
         }
-        console.log(data)
         return data
       }),
       catchError((error) => {
@@ -126,6 +125,7 @@ export class UserService {
     return this.apollo.watchQuery({
       query: USER_QUERY,
       errorPolicy: 'all',
+      fetchPolicy: 'network-only',
       variables: {
         id
       }

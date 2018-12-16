@@ -21,8 +21,8 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loaderChange = this.loaderService.loaderChange.subscribe(() => {
-      this.toggleLoader()
+    this.loaderChange = this.loaderService.loaderChange.subscribe((state) => {
+        this.changeLoader(state)
     })
     this.authService.authChange.subscribe((isAuth) => {
       this.isAuth = isAuth
@@ -31,8 +31,8 @@ export class HeaderComponent implements OnInit {
     this.authService.authState()
   }
 
-  toggleLoader(): void {
-    this.isLoading = !this.isLoading
+  changeLoader(state): void {
+    this.isLoading = state
   }
 
   onToggleSidenav() {

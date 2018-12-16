@@ -33,7 +33,6 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.getUsers()
-
     this.userCreatedSubscription = this.userService.subscribeUserCreated().subscribe(({data}) => {
       this.addUserToDataSource(data.userCreated)
     })
@@ -48,14 +47,14 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getUsers(): void {
-    this.loaderService.toggleLoader()
+    this.loaderService.changeLoader(true)
     this.userService.getUsers().subscribe(
       users => {
-        this.loaderService.toggleLoader()
+        this.loaderService.changeLoader(false)
         this.dataSource.data = users
       },
       error => {
-        this.loaderService.toggleLoader()
+        this.loaderService.changeLoader(false)
         this.messageService.createMessage(error)
         throw error
       }
@@ -87,29 +86,32 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteUser(user: User) {
-    this.loaderService.toggleLoader()
+    this.loaderService.changeLoader(true)
     this.userService.deleteUser(user.id).subscribe(
       success => {
         if (success) {
-          this.loaderService.toggleLoader()
+          this.loaderService.changeLoader(false)
           this.removeUserFromDataSource(user.id)
         }
       },
       error => {
-        this.loaderService.toggleLoader()
+        this.loaderService.changeLoader(false)
         this.messageService.createMessage(error)
         throw error
       })
   }
 
   removeUserFromDataSource(id: string) {
-    this.dataSource.data = this.dataSource.data.filter((u) => u.id !== id)
-    this.dataSource._updateChangeSubscription()
+    const index = this.dataSource.data.map((e) => e['id'] ).indexOf(id)
+    if (index > -1) {
+      this.dataSource.data.splice(index, 1)
+      this.dataSource._updateChangeSubscription()
+    }
   }
 
   ngOnDestroy() {
-    //this.userDeletedSubscription.unsubscribe()
-    //this.userCreatedSubscription.unsubscribe()
-    //this.userUpdatedSubscription.unsubscribe()
+    this.userDeletedSubscription.unsubscribe()
+    this.userCreatedSubscription.unsubscribe()
+    this.userUpdatedSubscription.unsubscribe()
   }
 }

@@ -23,14 +23,14 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.loaderService.toggleLoader()
+    this.loaderService.changeLoader(true)
     this.productService.getProducts().subscribe(
       products => {
-        this.loaderService.toggleLoader()
+        this.loaderService.changeLoader(false)
         this.products = products
       },
       error => {
-        this.loaderService.toggleLoader()
+        this.loaderService.changeLoader(false)
         this.messageService.createMessage(error)
         throw error
       })

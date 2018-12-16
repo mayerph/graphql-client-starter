@@ -81,12 +81,12 @@ export class UserDetailComponent implements OnInit {
   getUser(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.loaderService.toggleLoader()
+      this.loaderService.changeLoader(true)
       this.editUser = true
       this.userService.getUser(id)
       .subscribe(
         user => {
-          this.loaderService.toggleLoader()
+          this.loaderService.changeLoader(false)
           this.user = user
           this.selectedRole = this.user.role.id
           this.setUserValues(this.user)
@@ -95,7 +95,7 @@ export class UserDetailComponent implements OnInit {
           }
         },
         error => {
-          this.loaderService.toggleLoader()
+          this.loaderService.changeLoader(true)
           this.messageService.createMessage(error)
         }
       )
@@ -118,7 +118,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.loaderService.toggleLoader()
+    this.loaderService.changeLoader(true)
     if (this.userForm.touched) {
       const id = this.editUser ? this.userForm.controls.id.value : null
       const username =
@@ -135,22 +135,22 @@ export class UserDetailComponent implements OnInit {
       if (this.editUser) {
         this.userService.updateUser(id, username, email, role, img, password).subscribe(
           data => {
-            this.loaderService.toggleLoader()
+            this.loaderService.changeLoader(false)
             this.router.navigateByUrl('/user-admin')
           },
           error => {
-            this.loaderService.toggleLoader()
+            this.loaderService.changeLoader(false)
             this.messageService.createMessage(error)
             throw error
           })
       } else {
         this.userService.addUser(username, email, role, img, password).subscribe(
           data => {
-            this.loaderService.toggleLoader()
+            this.loaderService.changeLoader(false)
             this.router.navigateByUrl('/user-admin')
           },
           error => {
-            this.loaderService.toggleLoader()
+            this.loaderService.changeLoader(false)
             this.messageService.createMessage(error)
             throw error
           })
