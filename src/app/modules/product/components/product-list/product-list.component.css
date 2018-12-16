@@ -1,4 +1,6 @@
-
+mat-list-item:hover {
+    background: #f5f5f5;
+}
 
 img {
     border: 1px solid grey;

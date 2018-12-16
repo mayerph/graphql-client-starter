@@ -6,6 +6,11 @@ const USERS_QUERY = gql`
            query getUsers {
                 users {
                     ...defaultFields
+                    img {
+                        name
+                        mimeType
+                        source
+                    }
                 }
             }
             ${ USER_FRAGMENTS.defaultFields }`
