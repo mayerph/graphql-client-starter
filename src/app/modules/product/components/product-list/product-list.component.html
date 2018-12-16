@@ -1,12 +1,12 @@
 <section fxLayout="row" fxLayoutAlign="center center" class="product-list"> 
-  <mat-card mat-card fxFlex="100%" fxFlex="400px">
+  <mat-card mat-card fxFlex="80%" fxFlex.xs="100%">
     <mat-list>
-        <mat-list-item *ngFor="let product of products">
+        <mat-list-item *ngFor="let product of products; let firstProduct = first">
           <img matListAvatar [src]="product.img?.source || defaultImage" [alt]="product.name">
           <h3 matLine> {{ product.name }} </h3>
           <p matLine>
-            <span *ngFor="let category of product.categories; let first = first;"> 
-              <span *ngIf="!first">-</span>
+            <span *ngFor="let category of product.categories; let firstCategory = first;"> 
+              <span *ngIf="!firstCategory">-</span>
               {{ category.name }} 
             </span>
           </p>

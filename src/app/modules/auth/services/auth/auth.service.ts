@@ -7,6 +7,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/modules/user/models/user.model';
 import { Router } from '@angular/router';
+import { Permission } from 'src/app/modules/role/models/permission.model';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,15 @@ export class AuthService {
 
   authState(): void {
     this.authChange.next(this.isAuthenticated())
+  }
+
+  isAuthorized(permissions: string[], userPermissions: Permission[]): boolean {
+    if (!this.isAuthenticated() || permissions.every((p) => userPermissions.every((uP) => p !== uP.name))) {
+      this.router.navigate(['/signin']);
+      return false;
+    } else {
+        return true
+    }
   }
 
 }

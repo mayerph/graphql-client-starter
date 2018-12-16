@@ -8,24 +8,52 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { AuthGuard } from './modules/auth/guard/auth.guard'
 import { ProductListComponent } from './modules/product/components/product-list/product-list.component';
+import { Permission } from './modules/role/enums/permisson.enum'
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
   {
     path: 'user-admin',
     component: UserAdminComponent,
-    runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     data: {
-      expectedRole: 'ADMIN'
+      permissions: [Permission.adminDefault]
     }
   },
-  { path: 'user-admin/user/:id', component: UserDetailComponent },
-  { path: 'product-admin', component: ProductAdminComponent},
+  { 
+    path: 'user-admin/user/:id', 
+    component: UserDetailComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: [Permission.adminDefault]
+    }
+  },
+  { 
+    path: 'product-admin', 
+    component: ProductAdminComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: [Permission.adminDefault]
+    }
+  },
   { path: 'signin', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'adduser', component: UserDetailComponent},
-  { path: 'products', component: ProductListComponent},
+  {
+    path: 'adduser',
+    component: UserDetailComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: [Permission.adminDefault]
+    }
+  },
+  {
+    path: 'products',
+    component: ProductListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: [Permission.readDefault]
+    }
+  },
   { path: '**', redirectTo: '' }
 ];
 
