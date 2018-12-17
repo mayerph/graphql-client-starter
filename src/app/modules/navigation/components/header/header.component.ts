@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoaderService } from 'src/app/modules/loader/services/loader.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/services/auth/auth.service';
+import { Permission as PermissionEnum } from 'src/app/modules/role/enums/permisson.enum';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,8 @@ import { AuthService } from 'src/app/modules/auth/services/auth/auth.service';
 export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
   loaderChange: Subscription
-  authChange: Subscription
+  permissions = PermissionEnum
   isLoading = false
-  isAuth = false
 
   constructor(
     private loaderService: LoaderService,
@@ -24,11 +24,6 @@ export class HeaderComponent implements OnInit {
     this.loaderChange = this.loaderService.loaderChange.subscribe((state) => {
         this.changeLoader(state)
     })
-    this.authService.authChange.subscribe((isAuth) => {
-      this.isAuth = isAuth
-    })
-
-    this.authService.authState()
   }
 
   changeLoader(state): void {

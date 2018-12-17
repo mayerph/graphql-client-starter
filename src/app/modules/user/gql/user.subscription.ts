@@ -7,6 +7,11 @@ const USER_CREATED_SUBSCRIPTION = gql`
            subscription userCreated {
                 userCreated {
                     ...defaultFields
+                    img {
+                        name
+                        mimeType
+                        source
+                    }
                 }
             }
             ${ USER_FRAGMENTS.defaultFields }`
@@ -20,6 +25,11 @@ const USER_UPDATED_SUBSCRIPTION = gql`
            subscription userUpdated {
                 userUpdated {
                     ...defaultFields
+                    img {
+                        name
+                        mimeType
+                        source
+                    }
                 }
             }
             ${ USER_FRAGMENTS.defaultFields }`

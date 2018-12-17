@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   @Input() user: User;
   @Input() roles: Role[];
   @Input() selectedRole: string;
+  @Input() myUser: User
   userForm: FormGroup;
   url: any = 'http://127.0.0.1:8000/static/images/user/default/userImage_default.png'
   image: any

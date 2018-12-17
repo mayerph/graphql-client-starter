@@ -14,7 +14,7 @@ import { MessageService } from 'src/app/modules/message/services/message.service
   styleUrls: ['./user-overview.component.css']
 })
 export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns = ['img', 'id', 'username', 'email', 'role', 'star'];
+  displayedColumns = ['image', 'id', 'username', 'email', 'role', 'star'];
   displayedSmallColumns = ['id', 'username'];
   defaultImage = 'http://127.0.0.1:8000/static/images/user/default/userImage_default.png'
   dataSource = new MatTableDataSource<User>();

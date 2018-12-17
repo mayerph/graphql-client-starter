@@ -8,3 +8,7 @@ a:active {
     color: lightgrey;
 }
 
+span {
+    padding-left: 10px;
+}
+

@@ -6,26 +6,20 @@ const USERS_QUERY = gql`
            query getUsers {
                 users {
                     ...defaultFields
-                    img {
-                        name
-                        mimeType
-                        source
-                    }
+                    ...userImage
                 }
             }
-            ${ USER_FRAGMENTS.defaultFields }`
+            ${ USER_FRAGMENTS.defaultFields }
+            ${ USER_FRAGMENTS.userImage }`
 
 const USER_QUERY = gql`
            query getUser($id: ID!) {
                 user(id: $id) {
                     ...defaultFields
-                    img {
-                        name
-                        mimeType
-                        source
-                    }
+                    ...userImage
                 }
             }
-            ${ USER_FRAGMENTS.defaultFields }`
+            ${ USER_FRAGMENTS.defaultFields }
+            ${ USER_FRAGMENTS.userImage }`
 
 export { USERS_QUERY, USER_QUERY }

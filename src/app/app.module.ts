@@ -24,6 +24,8 @@ import { SignupComponent } from './modules/auth/components/signup/signup.compone
 import { ImageUploadComponent } from './modules/image/components/image-upload/image-upload.component';
 import { LoaderComponent } from './modules/loader/components/loader/loader.component';
 import { ProductListComponent } from './modules/product/components/product-list/product-list.component';
+import { UserDetailProfileComponent } from './modules/user/components/user-detail-profile/user-detail-profile.component';
+import { UserDetailAdminComponent } from './modules/user/components/user-detail-admin/user-detail-admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { ProductListComponent } from './modules/product/components/product-list/
     ImageUploadComponent,
     LoaderComponent,
     ProductListComponent,
+    UserDetailProfileComponent,
+    UserDetailAdminComponent,
   ],
   imports: [
     BrowserModule,

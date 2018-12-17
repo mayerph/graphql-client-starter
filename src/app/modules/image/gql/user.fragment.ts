@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { IMAGE_FRAGMENTS } from '../../image/gql/image.fragment'
 
 
 const USER_FRAGMENTS = {
@@ -13,15 +12,7 @@ const USER_FRAGMENTS = {
             id
             name
         }
-    }`,
-   userImage: gql`
-    fragment userImage on User {
-        img {
-            ...imageDefaultFields
-        }
-    }
-    ${ IMAGE_FRAGMENTS.imageDefaultFields }`
-
+    }`
 }
 
 export { USER_FRAGMENTS}

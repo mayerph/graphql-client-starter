@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, } from '@angular/core';
 import { AuthService } from 'src/app/modules/auth/services/auth/auth.service';
-import { Subscription } from 'rxjs';
+import { Permission as PermissionEnum } from 'src/app/modules/role/enums/permisson.enum';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -9,18 +9,11 @@ import { Subscription } from 'rxjs';
 })
 export class SidenavListComponent implements OnInit {
   @Output() closeSidenav = new EventEmitter<void>();
-  authChange: Subscription
-  isAuth = false
+  permissions = PermissionEnum
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
-    this.authChange = this.authService.authChange.subscribe((isAuth) => {
-      this.isAuth = isAuth
-    })
-
-    this.authService.authState()
-  }
+  ngOnInit() { }
 
   onClose() {
     this.closeSidenav.emit();

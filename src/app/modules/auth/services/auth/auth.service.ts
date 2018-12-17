@@ -55,8 +55,9 @@ export class AuthService {
         if (errors) {
           throw errors[0]
         }
-        this.authChange.next(true);
         const token = data.signIn.token
+        this.setToken(token)
+        //this.authChange.next(this.isAuthenticated())
         return token
       }),
       catchError((error) => {
@@ -67,7 +68,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token')
-    this.authChange.next(false);
+    //this.authChange.next(this.isAuthenticated());
     this.router.navigate(['/signin']);
   }
 
@@ -87,12 +88,13 @@ export class AuthService {
   }
 
   authState(): void {
-    this.authChange.next(this.isAuthenticated())
+    //this.authChange.next(this.isAuthenticated())
   }
 
-  isAuthorized(permissions: string[], userPermissions: Permission[]): boolean {
+  isAuthorized(permissions: string[]): boolean {
+    const user = this.decodeToken()
+    const userPermissions = user ? user.role.permissions : []
     if (!this.isAuthenticated() || permissions.every((p) => userPermissions.every((uP) => p !== uP.name))) {
-      this.router.navigate(['/signin']);
       return false;
     } else {
         return true
