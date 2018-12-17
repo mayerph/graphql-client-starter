@@ -25,7 +25,7 @@ export class UserService {
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.apollo.watchQuery({ query: USERS_QUERY, errorPolicy: 'all', fetchPolicy: 'network-only' })
+    return this.apollo.watchQuery({ query: USERS_QUERY, errorPolicy: 'all', fetchPolicy: 'no-cache' })
     .valueChanges
     .pipe(
       map((result: any) => {
@@ -42,21 +42,29 @@ export class UserService {
   }
 
   subscribeUserCreated(): Observable<any> {
-    return this.apollo.subscribe({ query: USER_CREATED_SUBSCRIPTION })
+    return this.apollo.subscribe({ 
+      query: USER_CREATED_SUBSCRIPTION,
+      fetchPolicy: 'no-cache'
+    })
   }
 
   subscribeUserDeleted(): Observable<any> {
-    return this.apollo.subscribe({ query: USER_DELETED_SUBSCRIPTION })
+    return this.apollo.subscribe({ 
+      query: USER_DELETED_SUBSCRIPTION,
+      fetchPolicy: 'no-cache'
+    })
   }
 
   subscribeUserUpdated(): Observable<any> {
-    return this.apollo.subscribe({ query: USER_UPDATED_SUBSCRIPTION })
+    return this.apollo.subscribe({ 
+      query: USER_UPDATED_SUBSCRIPTION
+    })
   }
 
   updateUser(id: string, username: string, email: string, role: string, image: Blob, password: string): Observable<any> {
-    //const file = new Blob(['Foo.'], { type: 'text/plain' })
     return this.apollo.mutate({
       mutation: UPDATE_USER_MUTATION,
+      fetchPolicy: 'no-cache',
       variables: {
         id,
         username,
@@ -81,6 +89,7 @@ export class UserService {
   addUser(username: string, email: string, role: string, image: Blob, password: string): Observable<any> {
     return this.apollo.mutate({
       mutation: CREATE_USER_MUTATION,
+      fetchPolicy: 'no-cache',
       variables: {
         username,
         email,
@@ -104,6 +113,7 @@ export class UserService {
   deleteUser(id: string): Observable<boolean> {
     return this.apollo.mutate({
       mutation: DELETE_USER_MUTATION,
+      fetchPolicy: 'no-cache',
       variables: {
         id
       }
@@ -125,7 +135,7 @@ export class UserService {
     return this.apollo.watchQuery({
       query: USER_QUERY,
       errorPolicy: 'all',
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       variables: {
         id
       }

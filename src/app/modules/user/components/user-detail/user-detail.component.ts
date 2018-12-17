@@ -19,9 +19,9 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 })
 export class UserDetailComponent implements OnInit {
   @Input() user: User;
-  @Input() roles: Role[];
-  @Input() selectedRole: string;
-  @Input() myUser: User
+  @Input() userImageUrl: string
+  selectedRole: string;
+  roles: Role[];
   userForm: FormGroup;
   url: any = 'http://127.0.0.1:8000/static/images/user/default/userImage_default.png'
   image: any
@@ -64,48 +64,38 @@ export class UserDetailComponent implements OnInit {
 
     });
   }
-  setUserValues(user: User) {
+  setUserValues() {
     this.userForm.patchValue({
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      password: user.password,
-      role: user.role.id
+      id: this.user.id,
+      username: this.user.username,
+      email: this.user.email,
+      password: this.user.password,
+      role: this.user.role.id
     })
   }
 
-  getData() {
-    this.getUser()
-    this.getRoles()
+  async getData() {
+    await this.getRoles()
+    this.manageUser()
   }
 
-  getUser(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.loaderService.changeLoader(true)
+  manageUser(): void {
+    if (this.user) {
       this.editUser = true
-      this.userService.getUser(id)
-      .subscribe(
-        user => {
-          this.loaderService.changeLoader(false)
-          this.user = user
-          this.selectedRole = this.user.role.id
-          this.setUserValues(this.user)
-          if (this.user.img !== null) {
-            this.url = this.user.img.source
-          }
-        },
-        error => {
-          this.loaderService.changeLoader(true)
-          this.messageService.createMessage(error)
-        }
-      )
+      this.selectedRole = this.user.role.id
+      if (this.user.img) {
+        this.url = this.user.img.source
+      }
+      this.setUserValues()
     }
   }
 
   getRoles(): void {
     this.roleService.getRoles()
-      .subscribe(roles => this.roles = roles);
+      .subscribe(roles => {
+        this.roles = roles
+        //this.setUserValues()
+      });
   }
 
   goBack(): void {

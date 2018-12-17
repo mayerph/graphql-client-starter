@@ -24,6 +24,7 @@ export class UserDetailAdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getUser()
   }
 
   getUser(): void {
@@ -35,10 +36,6 @@ export class UserDetailAdminComponent implements OnInit {
         user => {
           this.loaderService.changeLoader(false)
           this.user = user
-          this.selectedRole = this.user.role.id
-          if (this.user.img !== null) {
-            this.url = this.user.img.source
-          }
         },
         error => {
           this.loaderService.changeLoader(true)

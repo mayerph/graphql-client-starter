@@ -62,14 +62,23 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  updateUserInDataSource(user: User) {
-    this.dataSource.data = this.dataSource.data.filter((u) => {
+  async updateUserInDataSource(user: User) {
+    const index = this.dataSource.data.map((e) => e['id'] ).indexOf(user.id)
+    this.dataSource.data[index] = user
+    this.dataSource._updateChangeSubscription()
+    console.log(user)
+    
+    /*if (index > -1) {
+      this.dataSource.data.splice(index, 1)
+      this.dataSource._updateChangeSubscription()
+    }
+    this.dataSource.data = await this.dataSource.data.filter((u) => {
       if (u.id === user.id) {
         return user
       }
       return u
     })
-    this.dataSource._updateChangeSubscription()
+    this.dataSource._updateChangeSubscription()*/
   }
 
   addUserToDataSource(user: User): void {

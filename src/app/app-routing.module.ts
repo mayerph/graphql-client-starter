@@ -10,6 +10,7 @@ import { AuthGuard } from './modules/auth/guard/auth.guard'
 import { ProductListComponent } from './modules/product/components/product-list/product-list.component';
 import { Permission } from './modules/role/enums/permisson.enum'
 import { UserDetailProfileComponent } from './modules/user/components/user-detail-profile/user-detail-profile.component';
+import { UserDetailAdminComponent } from './modules/user/components/user-detail-admin/user-detail-admin.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
@@ -22,8 +23,8 @@ const routes: Routes = [
     }
   },
   {
-    path: 'user-admin/user/:id', 
-    component: UserDetailComponent,
+    path: 'user-admin/user/:id',
+    component: UserDetailAdminComponent,
     canActivate: [AuthGuard],
     data: {
       permissions: [Permission.adminDefault]
@@ -55,7 +56,14 @@ const routes: Routes = [
       permissions: [Permission.readDefault]
     }
   },
-  { path: 'profile', component: UserDetailProfileComponent},
+  { 
+    path: 'profile', 
+    component: UserDetailProfileComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: [Permission.readDefault]
+    }
+  },
   { path: '**', redirectTo: '' }
 ];
 
