@@ -11,4 +11,4 @@ const IMAGE_FRAGMENTS = {
     }`
 }
 
-export { IMAGE_FRAGMENTS}
+export { IMAGE_FRAGMENTS }

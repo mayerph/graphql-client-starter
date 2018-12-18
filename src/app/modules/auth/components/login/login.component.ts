@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     ).subscribe(
       token => {
         this.loaderService.changeLoader(false)
-        this.authService.setToken(token)
         this.router.navigateByUrl('/')
       },
       error => {
