@@ -19,6 +19,7 @@ import { MatSortModule, MatPaginatorModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
       MatPaginatorModule,
       MatMenuModule,
       MatTooltipModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      MatSlideToggleModule
     ],
   exports: [
         MatButtonModule,
@@ -64,7 +66,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
         MatSortModule,
         MatPaginatorModule,
         MatMenuModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatSlideToggleModule
   ],
 })
 export class MaterialModule { }

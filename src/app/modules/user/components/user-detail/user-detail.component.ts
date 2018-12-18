@@ -56,14 +56,12 @@ export class UserDetailComponent implements OnInit {
         validators: [Validators.required]
       }),
       email: new FormControl('', {
-        validators: [Validators.required, Validators.email] 
+        validators: [Validators.required, Validators.email]
       }),
       role: new FormControl('', {
         validators: [Validators.required]
       }),
-      password: new FormControl('', {
-        validators: [Validators.required]
-      }),
+      password: new FormControl(''),
       image: new FormControl(null)
 
     });
@@ -73,7 +71,6 @@ export class UserDetailComponent implements OnInit {
       id: this.user.id,
       username: this.user.username,
       email: this.user.email,
-      password: this.user.password,
       role: this.user.role.id
     })
   }
@@ -111,6 +108,15 @@ export class UserDetailComponent implements OnInit {
   changeState(image) {
     this.image = image
     this.userForm.controls.image.markAsTouched()
+  }
+  resetPassword(isChecked) {
+    if (isChecked) {
+      this.userForm.controls.password.setValidators([Validators.required])
+    } else {
+      this.userForm.controls.password.clearValidators()
+      this.userForm.controls.password.markAsUntouched()
+      this.userForm.controls.password.reset()
+    }
   }
 
   onSubmit(): void {
@@ -167,5 +173,7 @@ export class UserDetailComponent implements OnInit {
           })
       }*/
     }
+
+    
   }
 }

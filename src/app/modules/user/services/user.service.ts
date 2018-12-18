@@ -64,7 +64,6 @@ export class UserService {
   }
 
   updateUser(username: string, email: string, role: string, image: Blob, password: string, deleteImage: boolean, id: string): Observable<any> {
-    console.log(image)
     return this.apollo.mutate({
       mutation: UPDATE_USER_MUTATION,
       fetchPolicy: 'no-cache',

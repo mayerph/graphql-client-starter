@@ -8,7 +8,6 @@ const USER_FRAGMENTS = {
         id
         username
         email
-        password
         role {
             id
             name

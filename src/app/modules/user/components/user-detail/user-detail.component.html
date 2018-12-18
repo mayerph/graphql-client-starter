@@ -30,19 +30,24 @@
               required>
             </mat-form-field>
             <mat-form-field class="user-input">
-                <input 
-                type="password"
-                matInput 
-                placeholder="Password"
-                formControlName="password"
-                required>
-            </mat-form-field>
-            <mat-form-field class="user-input">
               <!--<input matInput placeholder="role" [(ngModel)]="user.role.name">-->
               <mat-select formControlName="role" placeholder="Role" required>
                   <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name  }}</mat-option>
               </mat-select>
             </mat-form-field>
+            <div class="user-input password-toggle">
+                <mat-slide-toggle #passwordToggle (change)="resetPassword(passwordToggle.checked)">Reset Password</mat-slide-toggle>
+            </div>
+            <div [hidden]="!passwordToggle.checked" class="user-input">
+              <mat-form-field class="user-input">
+                  <input 
+                  type="password"
+                  matInput 
+                  placeholder="Password"
+                  formControlName="password"
+                  [required]="passwordToggle.checked">
+              </mat-form-field>
+            </div>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="center">
           <a routerLink="/user-admin" mat-button>Cancel</a>

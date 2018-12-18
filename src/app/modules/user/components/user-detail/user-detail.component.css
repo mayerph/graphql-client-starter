@@ -16,3 +16,7 @@
     right: 0px;
     z-index: 100;
 }
+
+.password-toggle {
+    padding-bottom: 10px;
+}
