@@ -5,4 +5,5 @@ export type onSubmit = (
     role: string,
     image: Blob,
     password: string,
+    deleteImage: boolean,
     id?: string) => Observable<any>

@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ImageUploadComponent implements OnInit {
   @Input() url: any
-  @Input() width: string
+  @Input() defaultUrl: any
   @Output() fileToUpload = new EventEmitter();
   image: any
 
@@ -17,6 +17,7 @@ export class ImageUploadComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.url = this.defaultUrl
   }
 
   onSelectFile(event): void {
@@ -32,6 +33,11 @@ export class ImageUploadComponent implements OnInit {
       }
       reader.readAsArrayBuffer(event.target.files[0]);
     }
+  }
+
+  removeImage() {
+    this.url = this.defaultUrl
+    this.fileToUpload.emit(null);
   }
 
 }

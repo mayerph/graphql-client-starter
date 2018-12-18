@@ -1,8 +1,15 @@
-<img [src]="url" alt="Photo of a Shiba Inu" (click)="fileInput.click()" [ngStyle]="width">
-<input 
-  type='file' 
-  (change)="onSelectFile($event)" 
-  #fileInput 
-  hidden> 
+<div mat-card-image class="image-container">
+  <img [src]="url" alt="Photo of a Shiba Inu" (click)="fileInput.click()">
+  <input 
+    type='file' 
+    (change)="onSelectFile($event)" 
+    #fileInput 
+    hidden> 
+    <div class="remove-image">
+      <a mat-mini-fab color="primary" (click)="removeImage()">
+        <mat-icon>clear</mat-icon>
+      </a>
+    </div>
+  </div>
 
  

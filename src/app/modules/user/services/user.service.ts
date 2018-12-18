@@ -63,7 +63,8 @@ export class UserService {
     })
   }
 
-  updateUser(username: string, email: string, role: string, image: Blob, password: string, id: string): Observable<any> {
+  updateUser(username: string, email: string, role: string, image: Blob, password: string, deleteImage: boolean, id: string): Observable<any> {
+    console.log(image)
     return this.apollo.mutate({
       mutation: UPDATE_USER_MUTATION,
       fetchPolicy: 'no-cache',
@@ -73,7 +74,8 @@ export class UserService {
         email,
         role,
         image,
-        password
+        password,
+        deleteImage
       }
     }).pipe(
       map(({errors, data}) => {
@@ -88,7 +90,7 @@ export class UserService {
     )
   }
 
-  updateProfile(username: string, email: string, role: string, image: Blob, password: string): Observable<any> {
+  updateProfile(username: string, email: string, role: string, image: Blob, password: string, deleteImage: boolean): Observable<any> {
     return this.apollo.mutate({
       mutation: UPDATE_PROFILE_MUTATION,
       fetchPolicy: 'no-cache',
@@ -97,7 +99,8 @@ export class UserService {
         email,
         role,
         image,
-        password
+        password,
+        deleteImage
       }
     }).pipe(
       map(({errors, data}) => {

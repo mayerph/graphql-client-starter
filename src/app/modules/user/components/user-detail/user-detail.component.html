@@ -2,7 +2,7 @@
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
       <mat-card fxFlex.xs="100%" fxFlex="400px"> <!--*ngIf="user"-->
         <mat-card-title fxLayoutAlign="center">{{ user?.username }}</mat-card-title>
-        <app-image-upload [url]="url" [width]="{ 'width': 'calc(100% + 32px)'}" mat-card-image (fileToUpload)="changeState($event)"></app-image-upload>
+        <app-image-upload [url]="url" [defaultUrl]="defaultUrl" (fileToUpload)="changeState($event)"></app-image-upload>
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
           <mat-form-field class="user-input" *ngIf="editUser">
                 <input 

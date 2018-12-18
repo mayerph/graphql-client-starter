@@ -5,3 +5,14 @@
 .user-input {
     width: 100%;
 }
+
+.image-container {
+    position: relative;
+}
+
+.remove-image {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    z-index: 100;
+}

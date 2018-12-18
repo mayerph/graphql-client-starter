@@ -26,7 +26,8 @@ export class UserDetailComponent implements OnInit {
   selectedRole: string;
   roles: Role[];
   userForm: FormGroup;
-  url: any = 'assets/user/img/userImage_default.png'
+  defaultUrl = 'assets/user/img/userImage_default.png'
+  url: any
   image: any
   editUser: boolean
   passwordPlacholder = '1234'
@@ -87,6 +88,8 @@ export class UserDetailComponent implements OnInit {
       this.selectedRole = this.user.role.id
       if (this.user.img) {
         this.url = this.user.img.source
+      } else {
+        this.url = this.defaultUrl
       }
       this.setUserValues()
     }
@@ -120,13 +123,17 @@ export class UserDetailComponent implements OnInit {
         this.userForm.controls.email.touched ?  this.userForm.controls.email.value : null;
       const role =
         this.userForm.controls.role.touched ?  this.userForm.controls.role.value : null;
+
       const img =
-        this.userForm.controls.image.touched ?  this.image : null;
+        this.userForm.controls.image.touched && this.image ? this.image : null
+
+      const deleteImage = (this.userForm.controls.image.touched && !this.image)
+
       const password =
         this.userForm.controls.password.touched ?  this.userForm.controls.password.value : null;
 
 
-      this.onSubmitFunc(username, email, role, img, password, id).subscribe(
+      this.onSubmitFunc(username, email, role, img, password, deleteImage, id).subscribe(
         data => {
           this.loaderService.changeLoader(false)
           this.router.navigateByUrl('/user-admin')

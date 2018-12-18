@@ -4,8 +4,8 @@ import { USER_FRAGMENTS } from './user.fragment';
 
 
 const UPDATE_USER_MUTATION = gql`
-           mutation updateUser($id: ID!, $username: String, $email: String, $role: ID, $image: Upload, $password: String) {
-                updateUser(id: $id, username: $username, email: $email, role: $role, img: $image, password: $password) {
+           mutation updateUser($id: ID!, $username: String, $email: String, $role: ID, $image: Upload, $password: String, $deleteImage: Boolean) {
+                updateUser(id: $id, username: $username, email: $email, role: $role, img: $image, password: $password, deleteImage: $deleteImage) {
                     ...defaultFields
                 }
             }
@@ -13,8 +13,8 @@ const UPDATE_USER_MUTATION = gql`
 
 
 const UPDATE_PROFILE_MUTATION = gql`
-           mutation updateMe($username: String, $email: String, $role: ID, $image: Upload, $password: String) {
-                updateMe(username: $username, email: $email, role: $role, img: $image, password: $password) {
+           mutation updateMe($username: String, $email: String, $role: ID, $image: Upload, $password: String, $deleteImage: Boolean) {
+                updateMe(username: $username, email: $email, role: $role, img: $image, password: $password, deleteImage: $deleteImage) {
                     ...defaultFields
                 }
             }

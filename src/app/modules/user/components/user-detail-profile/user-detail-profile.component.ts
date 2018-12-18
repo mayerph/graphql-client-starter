@@ -19,7 +19,8 @@ export class UserDetailProfileComponent implements OnInit {
     email: string,
     role: string,
     image: Blob,
-    password: string) => this.userService.updateProfile(username, email, role, image, password)
+    password: string,
+    deleteImage: boolean) => this.userService.updateProfile(username, email, role, image, password, deleteImage)
 
   constructor(
     private loaderService: LoaderService,

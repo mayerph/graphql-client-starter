@@ -20,7 +20,8 @@ export class UserDetailAdminComponent implements OnInit {
     role: string,
     image: Blob,
     password: string,
-    id: string) => this.userService.updateUser(username, email, role, image, password, id)
+    deleteImage: boolean,
+    id: string) => this.userService.updateUser(username, email, role, image, password, deleteImage, id)
 
   constructor(
     private loaderService: LoaderService,
