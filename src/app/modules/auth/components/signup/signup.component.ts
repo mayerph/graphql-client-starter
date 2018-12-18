@@ -6,6 +6,8 @@ import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { AuthService } from '../../services/auth/auth.service';
 import { LoaderService } from 'src/app/modules/loader/services/loader.service';
+import { MessageService } from 'src/app/modules/message/services/message.service';
+import { Router } from '@angular/router';
 
 const moment = _moment;
 
@@ -38,7 +40,9 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   constructor(
     private authService: AuthService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private messageService: MessageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -58,9 +62,16 @@ export class SignupComponent implements OnInit {
       this.signupForm.controls.username.value,
       this.signupForm.controls.email.value,
       this.signupForm.controls.password.value
-    ).subscribe((token) => {
-      this.loaderService.changeLoader(false)
-    })
+    ).subscribe(
+      token => {
+        this.loaderService.changeLoader(false)
+        this.router.navigateByUrl('/')
+      },
+      error => {
+        this.loaderService.changeLoader(false)
+        this.messageService.createMessage(error)
+        throw error
+      })
   }
 
 }

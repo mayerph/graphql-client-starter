@@ -5,6 +5,7 @@ import { LoaderService } from 'src/app/modules/loader/services/loader.service';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'src/app/modules/message/services/message.service';
+import { onSubmit } from '../../types/onSubmit.type'
 
 @Component({
   selector: 'app-user-detail-profile',
@@ -13,6 +14,13 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 })
 export class UserDetailProfileComponent implements OnInit {
   user: User
+  onSubmitFunc: onSubmit = (
+    username: string,
+    email: string,
+    role: string,
+    image: Blob,
+    password: string) => this.userService.updateProfile(username, email, role, image, password)
+
   constructor(
     private loaderService: LoaderService,
     private userService: UserService,
@@ -29,7 +37,7 @@ export class UserDetailProfileComponent implements OnInit {
     const id = this.authService.decodeToken()._id
     if (id) {
       this.loaderService.changeLoader(true)
-      this.userService.getUser(id)
+      this.userService.getProfile()
       .subscribe(
         user => {
           this.loaderService.changeLoader(false)

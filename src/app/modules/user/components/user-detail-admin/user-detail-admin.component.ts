@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Role } from 'src/app/modules/role/models/role.model';
 import { MessageService } from 'src/app/modules/message/services/message.service';
+import { onSubmit } from '../../types/onSubmit.type';
 
 @Component({
   selector: 'app-user-detail-admin',
@@ -13,8 +14,13 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 })
 export class UserDetailAdminComponent implements OnInit {
   user: User
-  selectedRole: string
-  url: any
+  onSubmitFunc: onSubmit = (
+    username: string,
+    email: string,
+    role: string,
+    image: Blob,
+    password: string,
+    id: string) => this.userService.updateUser(username, email, role, image, password, id)
 
   constructor(
     private loaderService: LoaderService,

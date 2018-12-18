@@ -1,6 +1,6 @@
 <mat-nav-list>
   <div *ngIf="authService.isAuthenticated()">
-    <a mat-list-item (click)="onClose()">
+    <a mat-list-item (click)="onClose()" routerLink="/profile">
       <mat-icon>person</mat-icon>
       <span class="nav-caption">Profile</span>
     </a>

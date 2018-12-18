@@ -11,7 +11,7 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 })
 export class ProductListComponent implements OnInit {
   products: Product[]
-  defaultImage = 'http://127.0.0.1:8000/static/images/product/default/productImage_default.png'
+  defaultImage = 'assets/product/img/productImage_default.png'
   constructor(
     private productService: ProductService,
     private loaderService: LoaderService,

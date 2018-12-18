@@ -26,6 +26,7 @@ import { LoaderComponent } from './modules/loader/components/loader/loader.compo
 import { ProductListComponent } from './modules/product/components/product-list/product-list.component';
 import { UserDetailProfileComponent } from './modules/user/components/user-detail-profile/user-detail-profile.component';
 import { UserDetailAdminComponent } from './modules/user/components/user-detail-admin/user-detail-admin.component';
+import { UserDetailAddComponent } from './modules/user/components/user-detail-add/user-detail-add.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { UserDetailAdminComponent } from './modules/user/components/user-detail-
     ProductListComponent,
     UserDetailProfileComponent,
     UserDetailAdminComponent,
+    UserDetailAddComponent,
   ],
   imports: [
     BrowserModule,

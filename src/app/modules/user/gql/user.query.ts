@@ -22,4 +22,14 @@ const USER_QUERY = gql`
             ${ USER_FRAGMENTS.defaultFields }
             ${ USER_FRAGMENTS.userImage }`
 
-export { USERS_QUERY, USER_QUERY }
+const PROFILE_QUERY = gql`
+           query profile {
+                me {
+                    ...defaultFields
+                    ...userImage
+                }
+            }
+            ${ USER_FRAGMENTS.defaultFields }
+            ${ USER_FRAGMENTS.userImage }`
+
+export { USERS_QUERY, USER_QUERY, PROFILE_QUERY }

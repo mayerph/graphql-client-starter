@@ -10,6 +10,8 @@ import { ReactNativeFile } from 'apollo-upload-file'
 import { DomSanitizer } from '@angular/platform-browser';
 import { LoaderService } from 'src/app/modules/loader/services/loader.service';
 import { MessageService } from 'src/app/modules/message/services/message.service';
+import { onSubmit } from '../../types/onSubmit.type';
+
 
 
 @Component({
@@ -20,10 +22,11 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 export class UserDetailComponent implements OnInit {
   @Input() user: User;
   @Input() userImageUrl: string
+  @Input() onSubmitFunc: onSubmit
   selectedRole: string;
   roles: Role[];
   userForm: FormGroup;
-  url: any = 'http://127.0.0.1:8000/static/images/user/default/userImage_default.png'
+  url: any = 'assets/user/img/userImage_default.png'
   image: any
   editUser: boolean
   passwordPlacholder = '1234'
@@ -81,7 +84,6 @@ export class UserDetailComponent implements OnInit {
 
   manageUser(): void {
     if (this.user) {
-      this.editUser = true
       this.selectedRole = this.user.role.id
       if (this.user.img) {
         this.url = this.user.img.source
@@ -111,7 +113,7 @@ export class UserDetailComponent implements OnInit {
   onSubmit(): void {
     this.loaderService.changeLoader(true)
     if (this.userForm.touched) {
-      const id = this.editUser ? this.userForm.controls.id.value : null
+      const id = this.user ? this.userForm.controls.id.value : null
       const username =
         this.userForm.controls.username.touched ?  this.userForm.controls.username.value : null;
       const email =
@@ -123,7 +125,18 @@ export class UserDetailComponent implements OnInit {
       const password =
         this.userForm.controls.password.touched ?  this.userForm.controls.password.value : null;
 
-      if (this.editUser) {
+
+      this.onSubmitFunc(username, email, role, img, password, id).subscribe(
+        data => {
+          this.loaderService.changeLoader(false)
+          this.router.navigateByUrl('/user-admin')
+        },
+        error => {
+          this.loaderService.changeLoader(false)
+          this.messageService.createMessage(error)
+          throw error
+        })
+      /*if (this.editUser) {
         this.userService.updateUser(id, username, email, role, img, password).subscribe(
           data => {
             this.loaderService.changeLoader(false)
@@ -145,7 +158,7 @@ export class UserDetailComponent implements OnInit {
             this.messageService.createMessage(error)
             throw error
           })
-      }
+      }*/
     }
   }
 }

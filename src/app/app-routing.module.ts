@@ -11,6 +11,7 @@ import { ProductListComponent } from './modules/product/components/product-list/
 import { Permission } from './modules/role/enums/permisson.enum'
 import { UserDetailProfileComponent } from './modules/user/components/user-detail-profile/user-detail-profile.component';
 import { UserDetailAdminComponent } from './modules/user/components/user-detail-admin/user-detail-admin.component';
+import { UserDetailAddComponent } from './modules/user/components/user-detail-add/user-detail-add.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
@@ -42,7 +43,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent},
   {
     path: 'adduser',
-    component: UserDetailComponent,
+    component: UserDetailAddComponent,
     canActivate: [AuthGuard],
     data: {
       permissions: [Permission.adminDefault]

@@ -16,7 +16,7 @@ import { MessageService } from 'src/app/modules/message/services/message.service
 export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns = ['image', 'id', 'username', 'email', 'role', 'star'];
   displayedSmallColumns = ['id', 'username'];
-  defaultImage = 'http://127.0.0.1:8000/static/images/user/default/userImage_default.png'
+  defaultImage = 'assets/user/img/userImage_default.png'
   dataSource = new MatTableDataSource<User>();
   userCreatedSubscription: Subscription;
   userDeletedSubscription: Subscription;
@@ -66,19 +66,6 @@ export class UserOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
     const index = this.dataSource.data.map((e) => e['id'] ).indexOf(user.id)
     this.dataSource.data[index] = user
     this.dataSource._updateChangeSubscription()
-    console.log(user)
-    
-    /*if (index > -1) {
-      this.dataSource.data.splice(index, 1)
-      this.dataSource._updateChangeSubscription()
-    }
-    this.dataSource.data = await this.dataSource.data.filter((u) => {
-      if (u.id === user.id) {
-        return user
-      }
-      return u
-    })
-    this.dataSource._updateChangeSubscription()*/
   }
 
   addUserToDataSource(user: User): void {

@@ -35,6 +35,8 @@ export class AuthService {
           throw errors[0]
         }
         const token = data.signUp.token
+        this.setToken(token)
+        //this.authChange.next(this.isAuthenticated())
         return token
       }),
       catchError((error) => {
