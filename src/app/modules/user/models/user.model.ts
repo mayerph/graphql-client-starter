@@ -1,4 +1,4 @@
-import { Role } from '../../role/models/role.model';
+import { Role } from '../../role/models/role.model'
 import { Image } from '../../image/models/image.model'
 
 export class User {

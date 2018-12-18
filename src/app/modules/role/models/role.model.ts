@@ -1,7 +1,7 @@
-import { Permission } from './permission.model';
+import { Permission } from './permission.model'
 
 export class Role {
-    id: string;
-    name: string;
+    id: string
+    name: string
     permissions?: Permission[]
 }

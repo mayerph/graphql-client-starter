@@ -1,5 +1,4 @@
-import gql from 'graphql-tag';
-
+import gql from 'graphql-tag'
 
 const PRODUCT_FRAGMENTS = {
     productDefaultFields: gql`
@@ -25,7 +24,8 @@ const PRODUCT_FRAGMENTS = {
                 mimeType
                 source
             }
-        }`
+        }
+    `,
 }
 
 export { PRODUCT_FRAGMENTS }

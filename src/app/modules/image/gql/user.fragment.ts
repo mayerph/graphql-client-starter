@@ -1,18 +1,18 @@
-import gql from 'graphql-tag';
-
+import gql from 'graphql-tag'
 
 const USER_FRAGMENTS = {
-  defaultFields: gql`
-    fragment defaultFields on User {
-        id
-        username
-        email
-        password
-        role {
+    defaultFields: gql`
+        fragment defaultFields on User {
             id
-            name
+            username
+            email
+            password
+            role {
+                id
+                name
+            }
         }
-    }`
+    `,
 }
 
-export { USER_FRAGMENTS}
+export { USER_FRAGMENTS }

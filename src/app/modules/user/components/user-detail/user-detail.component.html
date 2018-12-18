@@ -1,7 +1,12 @@
 <section class="edit-user" fxLayout fxLayoutAlign="center center">
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
       <mat-card fxFlex.xs="100%" fxFlex="400px"> <!--*ngIf="user"-->
-        <mat-card-title fxLayoutAlign="center">{{ user?.username }}</mat-card-title>
+        <mat-card-header>
+          <!--<mat-card-title fxLayoutAlign="center">{{ user?.username }}</mat-card-title>-->
+          <img mat-card-avatar [src]="user?.img?.source || defaultUrl">
+          <mat-card-title>{{ user?.username }}</mat-card-title>
+          <mat-card-subtitle>{{ user?.role.name }}</mat-card-subtitle>
+        </mat-card-header>
         <app-image-upload [url]="url" [defaultUrl]="defaultUrl" (fileToUpload)="changeState($event)"></app-image-upload>
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
           <mat-form-field class="user-input" *ngIf="editUser">
@@ -29,24 +34,36 @@
               formControlName="email"
               required>
             </mat-form-field>
-            <mat-form-field class="user-input">
-              <!--<input matInput placeholder="role" [(ngModel)]="user.role.name">-->
-              <mat-select formControlName="role" placeholder="Role" required>
-                  <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name  }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <div class="user-input password-toggle">
-                <mat-slide-toggle #passwordToggle (change)="resetPassword(passwordToggle.checked)">Reset Password</mat-slide-toggle>
-            </div>
-            <div [hidden]="!passwordToggle.checked" class="user-input">
+            <div *ngIf="!user" class="user-input">
               <mat-form-field class="user-input">
                   <input 
                   type="password"
                   matInput 
                   placeholder="Password"
                   formControlName="password"
-                  [required]="passwordToggle.checked">
+                  required>
               </mat-form-field>
+            </div>
+            <mat-form-field class="user-input">
+              <!--<input matInput placeholder="role" [(ngModel)]="user.role.name">-->
+              <mat-select formControlName="role" placeholder="Role" required>
+                  <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="user" class="user-input">
+              <div class="user-input password-toggle">
+                  <mat-slide-toggle #passwordToggle (change)="resetPassword(passwordToggle.checked)">Reset Password</mat-slide-toggle>
+              </div>
+              <div [hidden]="!passwordToggle.checked" class="user-input">
+                <mat-form-field class="user-input">
+                    <input 
+                    type="password"
+                    matInput 
+                    placeholder="Password"
+                    formControlName="password"
+                    [required]="passwordToggle.checked">
+                </mat-form-field>
+              </div>
             </div>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="center">

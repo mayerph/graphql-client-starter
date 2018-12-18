@@ -1,5 +1,5 @@
-import { Category } from '../../category/models/category.model';
-import { Topic } from '../../topic/models/topic.model';
+import { Category } from '../../category/models/category.model'
+import { Topic } from '../../topic/models/topic.model'
 import { Image } from '../../image/models/image.model'
 
 export class Product {

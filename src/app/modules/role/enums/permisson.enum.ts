@@ -8,5 +8,5 @@ export enum Permission {
     deleteMessage = 'deleteMessage',
     updateMessage = 'updateMessage',
     createMessage = 'createMessage',
-    readPassword = 'readPassword'
+    readPassword = 'readPassword',
 }

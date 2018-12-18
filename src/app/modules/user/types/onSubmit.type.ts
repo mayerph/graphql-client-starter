@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'
 export type onSubmit = (
     username: string,
     email: string,
@@ -6,4 +6,5 @@ export type onSubmit = (
     image: Blob,
     password: string,
     deleteImage: boolean,
-    id?: string) => Observable<any>
+    id?: string
+) => Observable<any>
