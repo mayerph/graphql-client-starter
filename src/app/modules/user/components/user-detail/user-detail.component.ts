@@ -23,6 +23,7 @@ export class UserDetailComponent implements OnInit {
   @Input() user: User;
   @Input() userImageUrl: string
   @Input() onSubmitFunc: onSubmit
+  @Input() routeBack: string
   selectedRole: string;
   roles: Role[];
   userForm: FormGroup;
@@ -142,7 +143,7 @@ export class UserDetailComponent implements OnInit {
       this.onSubmitFunc(username, email, role, img, password, deleteImage, id).subscribe(
         data => {
           this.loaderService.changeLoader(false)
-          this.router.navigateByUrl('/user-admin')
+          this.router.navigateByUrl(this.routeBack)
         },
         error => {
           this.loaderService.changeLoader(false)

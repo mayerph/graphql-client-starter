@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user-detail-add.component.css']
 })
 export class UserDetailAddComponent implements OnInit {
+  routeBack = '/user-admin'
   onSubmitFunc: onSubmit = (
     username: string,
     email: string,

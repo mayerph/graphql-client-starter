@@ -13,6 +13,7 @@ import { onSubmit } from '../../types/onSubmit.type';
   styleUrls: ['./user-detail-admin.component.css']
 })
 export class UserDetailAdminComponent implements OnInit {
+  routeBack = '/user-admin'
   user: User
   onSubmitFunc: onSubmit = (
     username: string,
