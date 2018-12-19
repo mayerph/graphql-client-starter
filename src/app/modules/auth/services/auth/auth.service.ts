@@ -87,7 +87,6 @@ export class AuthService {
         return decodedToken
     }
 
-
     isAuthorized(permissions: string[]): boolean {
         const user = this.decodeToken()
         const userPermissions = user ? user.role.permissions : []
