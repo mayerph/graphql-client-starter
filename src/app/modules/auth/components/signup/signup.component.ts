@@ -8,7 +8,7 @@ import {
     MAT_DATE_FORMATS,
 } from '@angular/material'
 import { MomentDateAdapter } from '@angular/material-moment-adapter'
-import { AuthService } from '../../services/auth/auth.service'
+import { AuthService } from '../../services/auth.service'
 import { LoaderService } from 'src/app/modules/loader/services/loader.service'
 import { MessageService } from 'src/app/modules/message/services/message.service'
 import { Router } from '@angular/router'

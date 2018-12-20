@@ -10,7 +10,7 @@ import {
 
 import { Apollo } from 'apollo-angular'
 import { Router } from '@angular/router'
-import { SIGNIN_MUTATION, SIGNUP_MUTATION } from '../../gql'
+import { SIGNIN_MUTATION, SIGNUP_MUTATION } from '../gql'
 
 describe('AuthService', () => {
     let backend: ApolloTestingController
