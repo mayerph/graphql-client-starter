@@ -87,8 +87,40 @@ describe('AuthService', () => {
             .expectOne(SIGNIN_MUTATION)
             .networkError(new Error('Network Error'))
     })
+
+    it('logout with valid token', done => {
+        const token = '123'
+        localStorage.setItem('token', token)
+        service.logout()
+        expect(localStorage.getItem('token')).toBeNull()
+        done()
+    })
+
+    it('logout with invalid token', done => {
+        const token = null
+        localStorage.setItem('token', token)
+        service.logout()
+        expect(localStorage.getItem('token')).toBeNull()
+        done()
+    })
+
+    it('setToken with valid token', done => {
+        const token = '123'
+        service.setToken(token)
+        expect(localStorage.getItem('token')).not.toBeNull()
+        done()
+    })
+
+    it('setToken with invalid token', done => {
+        const token = null
+        service.setToken(token)
+        expect(localStorage.getItem('token')).toBeNull()
+        done()
+    })
 })
 
 class ApolloStub {}
 
-class RouterStub {}
+class RouterStub {
+    navigate(commands: any[]): void {}
+}

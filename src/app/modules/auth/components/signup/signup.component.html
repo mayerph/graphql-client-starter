@@ -1,47 +1,66 @@
-<section fxLayout="row" fxLayoutAlign="center center" class="signup"> 
+<section fxLayout="row" fxLayoutAlign="center center" class="signup">
     <mat-card mat-card fxFlex.xs="100%" fxFlex="400px">
-      <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="signupForm" (ngSubmit)="onSubmit()" fxLayoutGap="10px">
-        <mat-form-field>
-            <input 
-            type="username" 
-            matInput 
-            placeholder="Username"  
-            formControlName="username">
-            <mat-hint>Please enter a username.</mat-hint>
-            <mat-error>Username is invalid.</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input 
-            type="email" 
-            matInput 
-            placeholder="Your email"  
-            formControlName="email">
-            <mat-hint>Please enter a valid email.</mat-hint>
-            <mat-error>E-Mail is invalid.</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input 
-              type="password" 
-              matInput 
-              placeholder="Your password" 
-              formControlName="password">
-            <mat-hint>Please enter your password.</mat-hint>
-            <mat-error>Missing password.</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input 
-              matInput 
-              [matDatepicker]="picker" 
-              placeholder="Your Birthay"
-              [max]="maxDate"
-              formControlName="birthday"
+        <form
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            [formGroup]="signupForm"
+            (ngSubmit)="onSubmit()"
+            fxLayoutGap="10px"
+        >
+            <mat-form-field>
+                <input
+                    type="username"
+                    matInput
+                    placeholder="Username"
+                    formControlName="username"
+                />
+                <mat-hint>Please enter a username.</mat-hint>
+                <mat-error>Username is invalid.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    type="email"
+                    matInput
+                    placeholder="Your email"
+                    formControlName="email"
+                />
+                <mat-hint>Please enter a valid email.</mat-hint>
+                <mat-error>E-Mail is invalid.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    type="password"
+                    matInput
+                    placeholder="Your password"
+                    formControlName="password"
+                />
+                <mat-hint>Please enter your password.</mat-hint>
+                <mat-error>Missing password.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    matInput
+                    [matDatepicker]="picker"
+                    placeholder="Your Birthay"
+                    [max]="maxDate"
+                    formControlName="birthday"
+                />
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint>Please enter your birthday.</mat-hint>
+                <mat-error>Missing birthday.</mat-error>
+            </mat-form-field>
+            <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                [disabled]="signupForm.invalid"
             >
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-hint>Please enter your birthday.</mat-hint>
-            <mat-error>Missing birthday.</mat-error>
-        </mat-form-field>
-        <button type="submit" mat-raised-button color="primary" [disabled]="signupForm.invalid">Submit</button>
-      </form>
-  </mat-card>
-  </section>
+                Submit
+            </button>
+        </form>
+    </mat-card>
+</section>
