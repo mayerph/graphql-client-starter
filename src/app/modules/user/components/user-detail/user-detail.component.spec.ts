@@ -27,15 +27,7 @@ import { Image } from 'src/app/modules/image/models/image.model'
 describe('UserDetailComponent', () => {
     let component: UserDetailComponent
     let fixture: ComponentFixture<UserDetailComponent>
-
-    const loaderServiceSpy = jasmine.createSpyObj('LoaderService', [
-        'changeLoader',
-    ])
-    const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl'])
     const locationSpy = jasmine.createSpyObj('Location', ['go', 'back'])
-    const messageServiceSpy = jasmine.createSpyObj('MessageService', [
-        'createMessage',
-    ])
     const cdRefSpy = jasmine.createSpyObj('ChangeDetectorRef', [
         'detectChanges',
     ])
@@ -82,8 +74,6 @@ describe('UserDetailComponent', () => {
         TestBed.configureTestingModule({
             declarations: [UserDetailComponent, ImageUploadComponent],
             providers: [
-                { provide: LoaderService, useValue: loaderServiceSpy },
-                { provide: MessageService, useValue: messageServiceSpy },
                 { provide: Location, useValue: locationSpy },
                 { provide: ChangeDetectorRef, useValue: cdRefSpy },
                 { provide: RoleService, useValue: roleServiceStub },
