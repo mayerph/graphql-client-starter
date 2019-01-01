@@ -5,9 +5,8 @@ import {
     ChangeDetectorRef,
     AfterViewChecked,
 } from '@angular/core'
-import { UserService } from '../../services/user.service'
 import { User } from '../../models/user.model'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { RoleService } from '../../../role/services/role.service'
 import { Role } from '../../../role/models/role.model'
@@ -37,9 +36,9 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
 
     constructor(
         private loaderService: LoaderService,
-        private location: Location,
         private roleService: RoleService,
         private messageService: MessageService,
+        private location: Location,
         private router: Router,
         private cdRef: ChangeDetectorRef
     ) {}
