@@ -115,8 +115,8 @@ describe('UserDetailComponent', () => {
     it('create component', () => {
         component.user = user
         component.userImageUrl = user.img.source
-        component.onSubmitFunc = onSubmitFunc
         component.routeBack = '/user-admin'
+
         fixture.detectChanges()
         expect(component).toBeTruthy()
     })

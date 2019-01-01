@@ -2,10 +2,13 @@ import {
     Component,
     OnInit,
     Input,
+    Output,
     ChangeDetectorRef,
     AfterViewChecked,
+    EventEmitter,
 } from '@angular/core'
 import { User } from '../../models/user.model'
+import { UserForm } from '../../models/userForm.interface'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { RoleService } from '../../../role/services/role.service'
@@ -13,7 +16,6 @@ import { Role } from '../../../role/models/role.model'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { LoaderService } from 'src/app/modules/loader/services/loader.service'
 import { MessageService } from 'src/app/modules/message/services/message.service'
-import { onSubmit } from '../../types/onSubmit.type'
 
 @Component({
     selector: 'app-user-detail',
@@ -23,8 +25,8 @@ import { onSubmit } from '../../types/onSubmit.type'
 export class UserDetailComponent implements OnInit, AfterViewChecked {
     @Input() user: User
     @Input() userImageUrl: string
-    @Input() onSubmitFunc: onSubmit
     @Input() routeBack: string
+    @Output() runSubmitFunc: EventEmitter<UserForm> = new EventEmitter()
     selectedRole: string
     roles: Role[]
     userForm: FormGroup
@@ -32,14 +34,10 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
     url: any
     image: any
     editUser: boolean
-    passwordPlacholder = '1234'
 
     constructor(
-        private loaderService: LoaderService,
         private roleService: RoleService,
-        private messageService: MessageService,
         private location: Location,
-        private router: Router,
         private cdRef: ChangeDetectorRef
     ) {}
 
@@ -127,7 +125,6 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
     }
 
     onSubmit(): void {
-        this.loaderService.changeLoader(true)
         if (this.userForm.touched) {
             const id = this.user ? this.userForm.controls.id.value : null
             const username = this.userForm.controls.username.touched
@@ -152,25 +149,15 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
                 ? this.userForm.controls.password.value
                 : null
 
-            this.onSubmitFunc(
+            this.runSubmitFunc.emit({
                 username,
                 email,
                 role,
                 img,
                 password,
                 deleteImage,
-                id
-            ).subscribe(
-                data => {
-                    this.loaderService.changeLoader(false)
-                    this.router.navigateByUrl(this.routeBack)
-                },
-                error => {
-                    this.loaderService.changeLoader(false)
-                    this.messageService.createMessage(error)
-                    throw error
-                }
-            )
+                id,
+            })
         }
     }
 }

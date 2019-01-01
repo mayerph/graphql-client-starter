@@ -1,1 +1,4 @@
-<app-user-detail [onSubmitFunc]="onSubmitFunc" [routeBack]="routeBack"></app-user-detail>
+<app-user-detail
+    (runSubmitFunc)="submitFunc($event)"
+    [routeBack]="routeBack"
+></app-user-detail>

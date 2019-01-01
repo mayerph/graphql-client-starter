@@ -1,1 +1,6 @@
-<app-user-detail *ngIf="user" [user]="user" [onSubmitFunc]="onSubmitFunc" [routeBack]="routeBack"></app-user-detail>
+<app-user-detail
+    *ngIf="user"
+    [user]="user"
+    [routeBack]="routeBack"
+    (runSubmitFunc)="submitFunc($event)"
+></app-user-detail>

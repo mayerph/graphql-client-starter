@@ -3,9 +3,10 @@ import { User } from '../../models/user.model'
 import { AuthService } from 'src/app/modules/auth/services/auth.service'
 import { LoaderService } from 'src/app/modules/loader/services/loader.service'
 import { UserService } from '../../services/user.service'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { MessageService } from 'src/app/modules/message/services/message.service'
 import { onSubmit } from '../../types/onSubmit.type'
+import { UserForm } from '../../models/userForm.interface'
 
 @Component({
     selector: 'app-user-detail-profile',
@@ -15,33 +16,35 @@ import { onSubmit } from '../../types/onSubmit.type'
 export class UserDetailProfileComponent implements OnInit {
     routeBack = '/'
     user: User
-    onSubmitFunc: onSubmit = (
-        username: string,
-        email: string,
-        role: string,
-        image: Blob,
-        password: string,
-        deleteImage: boolean
-    ) =>
-        this.userService.updateProfile(
-            username,
-            email,
-            role,
-            image,
-            password,
-            deleteImage
-        )
 
     constructor(
         private loaderService: LoaderService,
         private userService: UserService,
-        private route: ActivatedRoute,
         private messageService: MessageService,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {}
 
     ngOnInit() {
         this.getUser()
+    }
+
+    submitFunc(userForm: UserForm) {
+        const { username, email, role, img, password, deleteImage } = userForm
+        this.loaderService.changeLoader(true)
+        this.userService
+            .updateProfile(username, email, role, img, password, deleteImage)
+            .subscribe(
+                data => {
+                    this.loaderService.changeLoader(false)
+                    this.router.navigateByUrl(this.routeBack)
+                },
+                error => {
+                    this.loaderService.changeLoader(false)
+                    this.messageService.createMessage(error)
+                    throw error
+                }
+            )
     }
 
     getUser(): void {

@@ -61,7 +61,7 @@
                     >
                         <mat-option
                             *ngFor="let role of roles"
-                            value="role.id"
+                            [value]="role.id"
                             >{{ role.name }}</mat-option
                         >
                     </mat-select>
