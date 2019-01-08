@@ -12,14 +12,6 @@ pipeline {
                 sh 'echo hello world'
             }
         }
-        stage('Build') {
-            agent {
-                docker { image 'obraun/node-jenkins:latest' }
-            }
-            steps {
-                sh 'npm run build-ts '
-            }
-        }
         stage('Build Docker Image') {
             agent {
                 label 'master'
