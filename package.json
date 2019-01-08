@@ -35,7 +35,6 @@
         "apollo-link-ws": "^1.0.10",
         "apollo-upload-client": "^9.1.0",
         "apollo-upload-file": "^8.0.1",
-        "bcrypt": "^3.0.2",
         "core-js": "^2.5.4",
         "graphql": "^0.13.2",
         "graphql-tag": "^2.10.0",

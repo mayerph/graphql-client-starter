@@ -3,16 +3,18 @@ pipeline {
     stages {
         stage('Lint') {
             agent {
-                docker { image 'node:lts-alpine' }
+                docker { 
+                    image 'obraun/node-jenkins:latest' 
+                    args '-u root:root'
+                }
             }   
             steps {
-                sh 'npm install'
-                sh 'npm run lint'
+                sh 'echo hello world'
             }
         }
         stage('Build') {
             agent {
-                docker { image 'node:lts-alpine' }
+                docker { image 'obraun/node-jenkins:latest' }
             }
             steps {
                 sh 'npm run build-ts '

@@ -1,11 +1,7 @@
-<mat-tab-group *ngIf="!ongoingTraining">
-    <mat-tab label="Users"> 
-      <app-user-overview></app-user-overview>
-    </mat-tab>
-    <mat-tab label="Roles">
-      <app-role-overview></app-role-overview>
-    </mat-tab>
+<mat-tab-group>
+    <mat-tab label="Users"> <app-user-overview></app-user-overview> </mat-tab>
+    <mat-tab label="Roles"> <app-role-overview></app-role-overview> </mat-tab>
     <mat-tab label="Permissions">
-      <app-permission-overview></app-permission-overview>
+        <app-permission-overview></app-permission-overview>
     </mat-tab>
 </mat-tab-group>

@@ -11,7 +11,7 @@ export class SidenavListComponent implements OnInit {
     @Output() closeSidenav = new EventEmitter<void>()
     permissions = PermissionEnum
 
-    constructor(private authService: AuthService) {}
+    constructor(public authService: AuthService) {}
 
     ngOnInit() {}
 

@@ -37,7 +37,7 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
     editUser: boolean
 
     constructor(
-        private authService: AuthService,
+        public authService: AuthService,
         private roleService: RoleService,
         private location: Location,
         private cdRef: ChangeDetectorRef
