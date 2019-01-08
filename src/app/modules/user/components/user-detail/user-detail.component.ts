@@ -14,8 +14,8 @@ import { Location } from '@angular/common'
 import { RoleService } from '../../../role/services/role.service'
 import { Role } from '../../../role/models/role.model'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { LoaderService } from 'src/app/modules/loader/services/loader.service'
-import { MessageService } from 'src/app/modules/message/services/message.service'
+import { AuthService } from 'src/app/modules/auth/services/auth.service'
+import { Permission as PermissionEnum } from 'src/app/modules/role/enums/permisson.enum'
 
 @Component({
     selector: 'app-user-detail',
@@ -27,6 +27,7 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
     @Input() userImageUrl: string
     @Input() routeBack: string
     @Output() runSubmitFunc: EventEmitter<UserForm> = new EventEmitter()
+    permissions = PermissionEnum
     selectedRole: string
     roles: Role[]
     userForm: FormGroup
@@ -36,6 +37,7 @@ export class UserDetailComponent implements OnInit, AfterViewChecked {
     editUser: boolean
 
     constructor(
+        private authService: AuthService,
         private roleService: RoleService,
         private location: Location,
         private cdRef: ChangeDetectorRef
