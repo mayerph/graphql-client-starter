@@ -24,7 +24,6 @@ import { Permission as PermissionEnum } from 'src/app/modules/role/enums/permiss
 })
 export class UserDetailComponent implements OnInit, AfterViewChecked {
     @Input() user: User
-    @Input() userImageUrl: string
     @Input() routeBack: string
     @Output() runSubmitFunc: EventEmitter<UserForm> = new EventEmitter()
     permissions = PermissionEnum
