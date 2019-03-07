@@ -1,42 +1,90 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <div fxHide.gt-xs>
-      <button (click)="onToggleSidenav()" mat-icon-button>
-          <mat-icon>menu</mat-icon>
-      </button>
-    </div>
-    <div>
-      <a routerLink="/" mat-button>HOME</a>
-    </div>
-    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
-        <div *ngIf="authService.isAuthorized([permissions.adminDefault])">
-          <a mat-button [matMenuTriggerFor]="admin">
-            Admin
-          </a>
-          <mat-menu #admin="matMenu">
-            <button routerLink="/user-admin" mat-menu-item>
-              <mat-icon>people</mat-icon>
-              <span>Users</span>
+    <mat-toolbar-row>
+        <div fxHide.gt-xs>
+            <button (click)="onToggleSidenav()" mat-icon-button>
+                <mat-icon>menu</mat-icon>
             </button>
-            <button routerLink="/product-admin" mat-menu-item>
-              <mat-icon>edit</mat-icon>
-              <span>Products</span>
-            </button>
-          </mat-menu>
         </div>
-        <a *ngIf="authService.isAuthenticated()" routerLink="/products" mat-button>Products</a>
-        <a *ngIf="!authService.isAuthenticated()" routerLink="/signin" mat-button>Sign in</a>
-        <a *ngIf="!authService.isAuthenticated()" routerLink="/signup" mat-button>Sign up</a>
-        <div *ngIf="authService.isAuthenticated()">
-          <a mat-button [matMenuTriggerFor]="menu">
-            <mat-icon>person</mat-icon>
-          </a>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/profile">Your profile</button>
-            <button mat-menu-item (click)="onLogout()">Sign out</button>
-          </mat-menu>
+        <div><a routerLink="/" mat-button class="menu-item">Home</a></div>
+        <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+            <div *ngIf="authService.isAuthorized([permissions.adminDefault])">
+                <a mat-button [matMenuTriggerFor]="admin" class="menu-item">
+                    Admin
+                </a>
+                <mat-menu #admin="matMenu">
+                    <button routerLink="/user-admin" mat-menu-item>
+                        <mat-icon>people</mat-icon>
+                        <span>Users</span>
+                    </button>
+                    <button routerLink="/product-admin" mat-menu-item>
+                        <mat-icon>edit</mat-icon>
+                        <span>Products</span>
+                    </button>
+                </mat-menu>
+            </div>
+            <a
+                *ngIf="authService.isAuthenticated()"
+                routerLink="/products"
+                mat-button
+                >Products</a
+            >
+            <a
+                *ngIf="!authService.isAuthenticated()"
+                routerLink="/signin"
+                mat-button
+                >Sign in</a
+            >
+            <a
+                *ngIf="!authService.isAuthenticated()"
+                routerLink="/signup"
+                mat-button
+                >Sign up</a
+            >
+            <a class="github" mat-button [matMenuTriggerFor]="githubproject"
+                ><img src="assets/github/img/GitHub-Mark-Light.png" /> GitHub
+            </a>
+            <mat-menu #githubproject="matMenu">
+                <a
+                    target="_blank"
+                    href="https://github.com/mayerph/graphql-starter"
+                    mat-menu-item
+                >
+                    <mat-icon>web</mat-icon>
+                    <span>graphql-starter</span>
+                </a>
+                <a
+                    target="_blank"
+                    href="https://github.com/mayerph/grapqhl-server-starter"
+                    mat-menu-item
+                >
+                    <mat-icon>computer</mat-icon>
+                    <span>graphql-server-starter</span>
+                </a>
+                <a
+                    target="_blank"
+                    href="https://github.com/mayerph/graphql-client-starter"
+                    mat-menu-item
+                >
+                    <mat-icon>smartphone</mat-icon>
+                    <span>graphql-client-starter</span>
+                </a>
+            </mat-menu>
+            <div *ngIf="authService.isAuthenticated()">
+                <a mat-button [matMenuTriggerFor]="menu" class="menu-item">
+                    <mat-icon>person</mat-icon>
+                </a>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="/profile">
+                        Your profile
+                    </button>
+                    <button mat-menu-item (click)="onLogout()">Sign out</button>
+                </mat-menu>
+            </div>
         </div>
-    </div>
-  </mat-toolbar-row>
+    </mat-toolbar-row>
 </mat-toolbar>
-<mat-progress-bar mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<mat-progress-bar
+    mode="indeterminate"
+    color="accent"
+    *ngIf="isLoading"
+></mat-progress-bar>
