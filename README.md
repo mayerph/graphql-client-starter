@@ -144,4 +144,23 @@ touch src/app/modules/<module>/types/<feature>.<role>.ts
 (e.g. touch src/app/modules/user/types/onSubmit.type.ts)
 ```
 
+### Protecting the application
+#### 1. Route-Protection
+Protecting a route requires extending a standard route configuration of the [routing module](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/app-routing.module.ts) with two properties:</br>- canActivate = defines the implementation of the protecting mechanisms</br>- data.permissions = defines the necessary permissions for using the route.
 
+
+```javascript
+    {
+        path: 'user-admin',
+        component: UserAdminComponent,
+        canActivate: [AuthGuard],
+        data: {
+            permissions: [Permission.adminDefault],
+        },
+    },
+```
+
+In this example the 'user-admin' route, which loads the [UserAdminComponent](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-detail-admin) is protected by the [AuthGuard](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/auth/guard/auth.guard.ts) class.
+
+The route can only be accessed by user with the adminDefault Permission. The permissions of the front-end are equal to them of the back-end. Nevertheless they have to be defined in an [enumeration](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/role/enums/permisson.enum.ts).
+A complete list of the permissions can be found [here](https://github.com/mayerph/grapqhl-server-starter/blob/master/README.md#permissions).
