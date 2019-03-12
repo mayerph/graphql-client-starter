@@ -1,27 +1,90 @@
 # GraphqlClientStarter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
+This projects implements a sample front-end and demonstrates how you can implement modern web apps nowadays, by using state of the art technologies
 
-## Development server
+# Pre-requirements
+To build and run this app locally you will need a few things:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+-   Install [Node.js](https://nodejs.org/en/)
+-   Install [Angular](https://angular.io/guide/quickstart)
+-   Install [VS Code](https://code.visualstudio.com/)
 
-## Code scaffolding
+# Getting started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-   Clone the repository
 
-## Build
+```
+git clone https://github.com/mayerph/graphql-client-starter.git
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+-   Install dependencies
 
-## Running unit tests
+```
+cd <project_name>
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-   Serve the application
 
-## Running end-to-end tests
+```
+cd <project_name>
+ng serve --open
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+# Project
+## General structure
+| Name | Description |
+| ---------------------------------------------- | -----------------------------------------------------------------------------------------------|
+| **src/app/modules**                                    | contains all features and models of the application                                                                          |
+| **src/app/app-routing.module.ts**                      | defines all routes of the application                                                                        |
+| **src/app/app.component.css**                      | css of the base component                                                                   |
+| **src/app/app.component.html**                      | html template of the base component                                                                  |
+| **src/app/app.component.spec.ts**                      | test class of the base component                                                                    |
+| **src/app/app.component.ts**                      | typescript class of the base component                                                                    |
+| **src/app/app.module.ts**                      | declares the app module                                                                    |
+| **src/app/graphql.module.ts**                      | initializes the connection to the back-end system                                                                   |
+| **src/app/material.module.ts**                      | imports all used material design components                                                                |
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Feature-based structure
+### Naming
+#### 1. Definitions
+- wrapper/child component = represents a component, that extends a child-component with some parameters and functions. For example a child component can implement an input formular. The wrapper components will implement the submit function of the input-formular. A good exemaple for that can be seen in this sample project. </br></br>- [child-component](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-detail) </br>- [wrapper-component](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-detail-admin)
+
+- feature = combines complementary implementations
+e.g. user
+
+- role = a certain kind of implementation
+e.g. interface
+
+- features-based directory = organizes all roles related to a feature. 
+
+
+#### 2. Convention
+- wrapper components</br>(e.g child component = user-detail)
+
+```
+<child-component>-<wrapper-extension>
+e.g. user-detail-admin
+```
+
+- graphql-queries, models
+```
+<feature>-<role>
+e.g. user.model.ts
+```
+
+
+
+### Sample project structure
+The project structure follows a kind of a feature-based approach. Any complementary implementations should be placed in the same directory. This one represents a module and consists of a few subdirectory for the components, the graphql queries, ...
+
+
+| Name | Description |
+| ---------------------------------------------- | -----------------------------------------------------------------------------------------------|
+| **src/app/modules/\<module>**                  | contains the components, services, graphQL-Queries, models, services and types of a feature                           |
+| **src/app/modules/\<module>/components**        | contains all components of a module.  |
+| **src/app/modules/\<module>/gql**              | contains all graphql query files  |
+| **src/app/modules/\<module>/models**           | contains all models and interfaces related to the module |
+| **src/app/modules/\<module>/service**           | contains all services of a module. The service uses the graphql queries of the gql directory to access the back-end   |
+| **src/app/modules/\<module>/types**           | contains the signatures of some methods   |
