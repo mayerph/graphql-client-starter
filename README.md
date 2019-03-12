@@ -20,14 +20,13 @@ git clone https://github.com/mayerph/graphql-client-starter.git
 -   Install dependencies
 
 ```
-cd <project_name>
+cd graphql-client-starter
 npm install
 ```
 
 -   Serve the application
 
 ```
-cd <project_name>
 ng serve --open
 ```
 
@@ -36,7 +35,7 @@ ng serve --open
 -   Serve the application
 
 ```
-cd <project_name>
+cd graphql-client-starter
 ng serve --open
 ```
 
