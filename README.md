@@ -40,7 +40,7 @@ cd <project_name>
 ng serve --open
 ```
 
--    Adding a new feature. [click here]()
+-    Adding a new feature. [click here](https://github.com/mayerph/graphql-client-starter#adding-a-new-featuremodule)
 
 
 # Project
@@ -103,19 +103,19 @@ The project structure follows a kind of a feature-based approach. Any complement
 ### Adding a new feature/module
 For adding a new feature or module you have to create a new feature-based directory in the src/app/modules directory including all files and directories equal to the sample project structure. This could be done by using the angular cli: 
 
-1. Adding a component</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-overview)
+**1. Adding a component</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-overview)**
 ```
 ng g c modules/<module>/components/<component> --module app
 (e.g. ng g c modules/help/components/help-overview --module app)
 ```
 
-2. Adding a service</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/services/user.service.ts)
+**2. Adding a service</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/services/user.service.ts)**
 ```
 ng g s modules/<module>/services/<service>
 (e.g. ng g s modules/<module>/services/help)
 ```
   
-3. Adding a graphql operation (query, mutation, subscription, fragment)</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/gql)
+**3. Adding a graphql operation (query, mutation, subscription, fragment)</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/gql)**
 ```
 mkdir src/app/modules/<module>/gql
 (e.g. touch src/app/modules/user/gql/)
@@ -127,7 +127,7 @@ touch src/app/modules/<module>/gql/<feature>.<role>.ts
 (e.g. touch src/app/modules/user/gql/user.query.ts)
 ```
 
-4. Adding a model</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/models/user.model.ts)
+**4. Adding a model</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/models/user.model.ts)**
 ```
 mkdir src/app/modules/<module>/models
 (e.g. touch src/app/modules/user/models/)
@@ -136,7 +136,7 @@ touch src/app/modules/<module>/models/<feature>.<role>.ts
 (e.g. touch src/app/modules/user/models/user.model.ts)
 ```
 
-5. Adding a type</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/types/onSubmit.type.ts)
+**5. Adding a type</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/types/onSubmit.type.ts)**
 ```
 mkdir src/app/modules/<module>/types
 (e.g. touch src/app/modules/user/types/)
