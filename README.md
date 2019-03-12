@@ -180,3 +180,48 @@ constructor(public authService: AuthService) {}
 </div>
 ```
 In this example the container element is only viewed if the users has the adminDefault permission. Alternatively you can use the isAuthenticated() method to check if the user is signed in. A good example for hiding and showing elements according to the user's permissions can be found [here](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/navigation/components/header/header.component.html) 
+
+### Responsive Webdesign
+For optimizing the application's layout to the width of a device the flex-layout module has been used.
+A detailed documentation of the module can be found on the [official github page](https://github.com/angular/flex-layout/wiki/Declarative-API-Overview). 
+
+In this sample project the module is used for three kinds of modification:
+1. reposition of elements. [welcome.component](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/welcome/components/welcome.component.html) line 1
+```html
+<div class="welcome" fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="20px" fxLayoutAlign="center center">
+  <section>
+    <h1>SKI</h1>
+    <p>rent ski for the whole saison</p>
+  </section>
+  <section>
+    <h1>SNOWBOARD</h1>
+    <p>rent snowboards for the whole saison</p>
+  </section>
+  <section>
+    <h1>ACCESSOIRES</h1>
+    <p>rent accessoires for the whole saison</p>
+  </section>
+</div>
+```
+
+The code snipped above shows a container element containing three section elements. 
+Default 
+
+2. increase and shrink the element's width. [user-detail.component](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/components/user-detail/user-detail.component.html) line 3
+```html
+<mat-card fxFlex.xs="100%" fxFlex="400px">
+  <!-- some content -->
+</mat-card>
+```
+The element above will be displayed along the full width of the display if the width of display is xs (extra small). Otherwise the element has a width of 400px. 
+
+3. hide and show elements. [header.component.html](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/navigation/components/header/header.component.html) line 3
+```html
+<div fxHide.gt-xs>
+    <button (click)="onToggleSidenav()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+</div>
+```
+
+The code-snipped above defines the menu-button for the side navigation bar. The button should be only visible for small devices. Therefore the fxHide.gt-xs directive ("hide element if width of the device is greater then extra small") is called.
