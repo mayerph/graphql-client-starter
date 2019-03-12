@@ -162,5 +162,21 @@ Protecting a route requires extending a standard route configuration of the [rou
 
 In this example the 'user-admin' route, which loads the [UserAdminComponent](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-detail-admin) is protected by the [AuthGuard](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/auth/guard/auth.guard.ts) class.
 
-The route can only be accessed by user with the adminDefault Permission. The permissions of the front-end are equal to them of the back-end. Nevertheless they have to be defined in an [enumeration](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/role/enums/permisson.enum.ts).
+The route can only be accessed by users with the adminDefault Permission. The permissions of the front-end are equal to them of the back-end. Nevertheless they have to be defined in an [enumeration](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/role/enums/permisson.enum.ts).
 A complete list of the permissions can be found [here](https://github.com/mayerph/grapqhl-server-starter/blob/master/README.md#permissions).
+
+#### 2. Hide and show elements according to the user permissions
+To hide and show elements according to the users permissions you have to use the methods of the authService.
+
+- (1) Inject the authService via the constructor of the typescript class of the component
+```javascript
+constructor(public authService: AuthService) {}
+```
+
+- (2) call a function of the authService in the component's template
+```html
+<div *ngIf="authService.isAuthorized([permissions.adminDefault])">
+  <!-- some content --> 
+</div>
+```
+In this example the container element is only viewed if the users has the adminDefault permission. Alternatively you can use the isAuthenticated() method to check if the user is signed in. A good example for hiding and showing elements according to the user's permissions can be found [here](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/navigation/components/header/header.component.html) 
