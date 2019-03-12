@@ -31,6 +31,18 @@ cd <project_name>
 ng serve --open
 ```
 
+# Developing
+
+-   Serve the application
+
+```
+cd <project_name>
+ng serve --open
+```
+
+-    Adding a new feature. [click here]()
+
+
 # Project
 ## General structure
 | Name | Description |
@@ -75,7 +87,6 @@ e.g. user.model.ts
 ```
 
 
-
 ### Sample project structure
 The project structure follows a kind of a feature-based approach. Any complementary implementations should be placed in the same directory. This one represents a module and consists of a few subdirectory for the components, the graphql queries, ...
 
@@ -88,3 +99,50 @@ The project structure follows a kind of a feature-based approach. Any complement
 | **src/app/modules/\<module>/models**           | contains all models and interfaces related to the module |
 | **src/app/modules/\<module>/service**           | contains all services of a module. The service uses the graphql queries of the gql directory to access the back-end   |
 | **src/app/modules/\<module>/types**           | contains the signatures of some methods   |
+
+### Adding a new feature/module
+For adding a new feature or module you have to create a new feature-based directory in the src/app/modules directory including all files and directories equal to the sample project structure. This could be done by using the angular cli: 
+
+1. Adding a component</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/components/user-overview)
+```
+ng g c modules/<module>/components/<component> --module app
+(e.g. ng g c modules/help/components/help-overview --module app)
+```
+
+2. Adding a service</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/services/user.service.ts)
+```
+ng g s modules/<module>/services/<service>
+(e.g. ng g s modules/<module>/services/help)
+```
+  
+3. Adding a graphql operation (query, mutation, subscription, fragment)</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/tree/master/src/app/modules/user/gql)
+```
+mkdir src/app/modules/<module>/gql
+(e.g. touch src/app/modules/user/gql/)
+
+touch src/app/modules/<module>/gql/index.ts
+(e.g. touch src/app/modules/user/gql/index.ts)
+
+touch src/app/modules/<module>/gql/<feature>.<role>.ts
+(e.g. touch src/app/modules/user/gql/user.query.ts)
+```
+
+4. Adding a model</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/models/user.model.ts)
+```
+mkdir src/app/modules/<module>/models
+(e.g. touch src/app/modules/user/models/)
+
+touch src/app/modules/<module>/models/<feature>.<role>.ts
+(e.g. touch src/app/modules/user/models/user.model.ts)
+```
+
+5. Adding a type</br>[sample implementation](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/types/onSubmit.type.ts)
+```
+mkdir src/app/modules/<module>/types
+(e.g. touch src/app/modules/user/types/)
+
+touch src/app/modules/<module>/types/<feature>.<role>.ts
+(e.g. touch src/app/modules/user/types/onSubmit.type.ts)
+```
+
+
