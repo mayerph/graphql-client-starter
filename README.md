@@ -192,7 +192,7 @@ A detailed documentation of the module can be found on the [official github page
 
 - Mobile</br>
 
-![frontend_1](../assets/frontend_2.png?raw=true)<!-- .element style="border: 0; background: None; box-shadow: None" -->
+<img src="https://raw.githubusercontent.com/mayerph/graphql-client-starter/assets/frontend_2.png" width="50%">
 
 In this sample project the module is used for three kinds of modification:
 1. reposition of elements. [welcome.component](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/welcome/components/welcome.component.html) line 1
