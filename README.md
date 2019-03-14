@@ -184,6 +184,7 @@ constructor(public authService: AuthService) {}
 In this example the container element is only viewed if the users has the adminDefault permission. Alternatively you can use the isAuthenticated() method to check if the user is signed in. A good example for hiding and showing elements according to the user's permissions can be found [here](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/navigation/components/header/header.component.html) 
 
 ### Responsive Webdesign
+#### 1. flex-layout
 For optimizing the application's layout to the width of a device the flex-layout module has been used.
 A detailed documentation of the module can be found on the [official github page](https://github.com/angular/flex-layout/wiki/Declarative-API-Overview). 
 
@@ -234,3 +235,31 @@ The element above will be displayed along the full width of the display if the w
 ```
 
 The code-snipped above defines the menu-button for the side navigation bar. The button should be only visible for small devices. Therefore the fxHide.gt-xs directive ("hide element if width of the device is greater then extra small") is called.
+
+#### 2. Angular Material
+The Material Design Components implement reusable building blocks, which make it easy to create a reactive layout. A detailed description can be found in the offical [Angular Material Guide](https://material.angular.io/guides).
+The available components can be found [here](https://material.angular.io/components/categories). In the API section of each element is a description, how to use the specific component.
+
+##### Adding a Material Design Component
+1. Import the specific module in the [src/app/material.module.ts](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/material.module.ts) file
+```javascript
+import { MatButtonModule } from '@angular/material/button';
+```
+
+2. Add the module to the imports and exports property
+```javascript
+@NgModule({
+  imports: [
+      MatButtonModule,
+    ],
+  exports: [
+        MatButtonModule
+  ],
+})
+export class MaterialModule { }
+```
+
+3. Import the material components in the typescript class of the component
+```javascript
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material'
+```
