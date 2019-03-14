@@ -214,8 +214,7 @@ In this sample project the module is used for three kinds of modification:
 </div>
 ```
 
-The code snipped above shows a container element containing three section elements. 
-Default 
+The code snipped above shows a container element containing three section elements. By default these elements are ordered horizontally.  (fxLayout="column"). For devices with a display width greater than medium (fxLayout.gt-md) the section elements will be ordered vertically.  
 
 2. increase and shrink the element's width. [user-detail.component](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/user/components/user-detail/user-detail.component.html) line 3
 ```html
