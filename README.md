@@ -188,6 +188,7 @@ For optimizing the application's layout to the width of a device the flex-layout
 A detailed documentation of the module can be found on the [official github page](https://github.com/angular/flex-layout/wiki/Declarative-API-Overview). 
 
 - Desktop</br>
+
 ![frontend_1](../assets/frontend_1.png?raw=true)
 
 - Mobile</br>
