@@ -187,12 +187,12 @@ In this example the container element is only viewed if the users has the adminD
 For optimizing the application's layout to the width of a device the flex-layout module has been used.
 A detailed documentation of the module can be found on the [official github page](https://github.com/angular/flex-layout/wiki/Declarative-API-Overview). 
 
-- Desktop
+- Desktop</br>
 ![frontend_1](../assets/frontend_1.png?raw=true)
 
 - Mobile</br>
 
-<img src="https://raw.githubusercontent.com/mayerph/graphql-client-starter/assets/frontend_2.png" width="50%">
+<img src="https://raw.githubusercontent.com/mayerph/graphql-client-starter/assets/frontend_2.png" width="40%">
 
 In this sample project the module is used for three kinds of modification:
 1. reposition of elements. [welcome.component](https://github.com/mayerph/graphql-client-starter/blob/master/src/app/modules/welcome/components/welcome.component.html) line 1
