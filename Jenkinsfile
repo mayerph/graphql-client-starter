@@ -9,7 +9,8 @@ pipeline {
                 }
             }   
             steps {
-                sh 'echo hello world'
+                sh 'npm install'
+                sh 'ng lint'
             }
         }
         stage('Build Docker Image') {
