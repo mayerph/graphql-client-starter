@@ -10,7 +10,7 @@ pipeline {
             }   
             steps {
                 sh 'npm install'
-                sh 'ng lint'
+                sh 'npm run lint'
             }
         }
         stage('Build Docker Image') {
